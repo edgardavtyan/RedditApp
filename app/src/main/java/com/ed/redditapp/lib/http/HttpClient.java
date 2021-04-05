@@ -5,14 +5,29 @@ import android.util.Base64;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HttpClient {
+    public String get(String url) {
+        String result = null;
+
+        try {
+            URL urlConn = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) urlConn.openConnection();
+            connection.connect();
+            result = getData(connection);
+        } catch (Exception e) {
+        }
+
+        return result;
+    }
+
     public String basicAuth(String url, String user, String pass, String[][] content) {
-        StringBuilder result = new StringBuilder();
+        String result = null;
 
         try {
             String basicAuth = "Basic " + new String(Base64.encode((user + ":" + pass).getBytes(), Base64.NO_WRAP));
@@ -34,18 +49,23 @@ public class HttpClient {
 
             connection.connect();
 
-            InputStream stream = new BufferedInputStream(connection.getInputStream());
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-
-            String line = "";
-
-            while ((line = reader.readLine()) != null)
-                result.append(line);
+            result = getData(connection);
 
             connection.disconnect();
         } catch (Exception e) {
         }
 
-        return result.toString();
+        return result;
+    }
+
+    private String getData(HttpURLConnection connection) throws IOException {
+        StringBuilder builder = new StringBuilder();
+        InputStream stream = new BufferedInputStream(connection.getInputStream());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        String line = "";
+        while ((line = reader.readLine()) != null)
+            builder.append(line);
+
+        return builder.toString();
     }
 }
