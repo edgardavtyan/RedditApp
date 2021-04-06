@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:titleTextColor="@color/white"
+            tools:title="Subreddit Name" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Subreddit info sample text"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="4dp"
+            />
+
+        <TextView
+            android:id="@+id/subsCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="12941274 subscribers"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="8dp"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+</LinearLayout>

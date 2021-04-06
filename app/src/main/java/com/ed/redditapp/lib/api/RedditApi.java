@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 public class RedditApi {
     private static final String URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on";
-
+    private static final String URL_SUBREDDIT = "https://www.reddit.com/r/%s/about.json";
     private final HttpClient httpClient;
 
     public RedditApi() {
@@ -30,6 +30,22 @@ public class RedditApi {
                 results[i] = subReddit;
             }
             return results;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public SubReddit getSubredditInfo(String subredditName) {
+        try {
+            String url = String.format(URL_SUBREDDIT, subredditName);
+            JSONObject json = httpClient.getJson(url).getJSONObject("data");
+
+            SubReddit subreddit = new SubReddit();
+            subreddit.setName(json.getString("display_name"));
+            subreddit.setSubsCount(json.getInt("subscribers"));
+            subreddit.setTitle(json.getString("title"));
+            subreddit.setDescription(json.getString("public_description"));
+            return subreddit;
         } catch (Exception e) {
             return null;
         }

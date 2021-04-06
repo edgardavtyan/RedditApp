@@ -1,5 +1,6 @@
 package com.ed.redditapp.ui.fragments.search;
 
+import com.ed.redditapp.FragmentScope;
 import com.ed.redditapp.lib.api.RedditApi;
 
 import dagger.Module;
@@ -14,16 +15,20 @@ public class SearchFragmentDaggerModule {
     }
 
     @Provides
+    @FragmentScope
     public SearchModel provideModel(RedditApi redditApi) {
         return new SearchModel(redditApi);
     }
 
     @Provides
+    @FragmentScope
     public SearchPresenter providePresenter(SearchModel model) {
         return new SearchPresenter(model, fragment);
     }
 
-    @Provides SearchAdapter provideAdapter() {
-        return new SearchAdapter(fragment.getActivity());
+    @Provides
+    @FragmentScope
+    SearchAdapter provideAdapter(SearchPresenter presenter) {
+        return new SearchAdapter(fragment.getActivity(), presenter);
     }
 }

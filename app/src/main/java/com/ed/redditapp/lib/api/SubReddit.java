@@ -6,5 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class SubReddit {
     private String name;
+    private String title;
+    private String description;
     private int subsCount;
 }

@@ -18,4 +18,8 @@ public class SearchPresenter {
     public void onBtnCloseClick(View v) {
         view.close();
     }
+
+    public void onItemClick(int position) {
+        view.gotoSubRedditActivity(model.getSubreddits()[position]);
+    }
 }

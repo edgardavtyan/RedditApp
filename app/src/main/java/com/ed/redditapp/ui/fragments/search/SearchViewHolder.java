@@ -12,10 +12,11 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
     private final ListitemSimpleBinding binding;
     private final Context context;
 
-    public SearchViewHolder(View itemView) {
+    public SearchViewHolder(View itemView, SearchPresenter presenter) {
         super(itemView);
         context = itemView.getContext();
         binding = ListitemSimpleBinding.bind(itemView);
+        itemView.setOnClickListener(v -> presenter.onItemClick(getAdapterPosition()));
     }
 
     public void setText(String text) {

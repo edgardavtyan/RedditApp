@@ -13,18 +13,20 @@ import com.ed.redditapp.lib.api.SubReddit;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
     private final Context context;
+    private final SearchPresenter presenter;
 
     private SubReddit[] data;
 
-    public SearchAdapter(Context context) {
+    public SearchAdapter(Context context, SearchPresenter presenter) {
         this.context = context;
+        this.presenter = presenter;
     }
 
     @NonNull
     @Override
     public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.listitem_simple, parent, false);
-        return new SearchViewHolder(itemView);
+        return new SearchViewHolder(itemView, presenter);
     }
 
     @Override
