@@ -1,4 +1,4 @@
-package com.ed.redditapp;
+package com.ed.redditapp.ui.activities.main;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +9,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.ed.redditapp.R;
+import com.ed.redditapp.ui.fragments.search.SearchFragment;
 import com.ed.redditapp.databinding.ActivityMainBinding;
 import com.ed.redditapp.lib.api.RedditApi;
 

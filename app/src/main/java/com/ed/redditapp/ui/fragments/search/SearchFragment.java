@@ -1,4 +1,4 @@
-package com.ed.redditapp;
+package com.ed.redditapp.ui.fragments.search;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ed.redditapp.databinding.FragmentSearchBinding;
+import com.ed.redditapp.ui.activities.main.MainActivity;
 
 public class SearchFragment extends Fragment {
     private FragmentSearchBinding binding;

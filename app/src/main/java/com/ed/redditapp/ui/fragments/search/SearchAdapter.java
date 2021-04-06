@@ -1,4 +1,4 @@
-package com.ed.redditapp;
+package com.ed.redditapp.ui.fragments.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ed.redditapp.R;
 
 import java.util.UUID;
 

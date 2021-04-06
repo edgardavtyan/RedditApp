@@ -1,4 +1,4 @@
-package com.ed.redditapp;
+package com.ed.redditapp.ui.fragments.search;
 
 import android.view.View;
 
