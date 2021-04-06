@@ -9,7 +9,7 @@ public class SearchModel {
         this.searchAsyncTask = new SearchAsyncTask(redditApi);
     }
 
-    public void searchSubreddits(String searchText, SearchAsyncTask.SearchResultCallback callback) {
+    public void searchSubreddits(String searchText, SearchAsyncTask.Callback callback) {
         searchAsyncTask.run(searchText, callback);
     }
 }

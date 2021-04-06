@@ -5,14 +5,14 @@ import com.ed.redditapp.lib.Timer;
 import com.ed.redditapp.lib.api.RedditApi;
 
 public class SearchAsyncTask {
-    public interface SearchResultCallback {
+    public interface Callback {
         void callback(String[] result);
     }
 
     private final Timer searchDelayTimer;
 
     private String searchText;
-    private SearchResultCallback searchCallback;
+    private Callback searchCallback;
 
     public SearchAsyncTask(RedditApi api) {
         searchDelayTimer = new Timer(1000, () -> {
@@ -23,7 +23,7 @@ public class SearchAsyncTask {
         });
     }
 
-    public void run(String searchText, SearchResultCallback searchCallback) {
+    public void run(String searchText, Callback searchCallback) {
         this.searchText = searchText;
         this.searchCallback = searchCallback;
         searchDelayTimer.run();
