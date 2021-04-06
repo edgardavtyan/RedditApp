@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ed.redditapp.App;
 import com.ed.redditapp.databinding.FragmentSearchBinding;
+import com.ed.redditapp.lib.Timer;
 import com.ed.redditapp.lib.api.RedditApi;
 import com.ed.redditapp.ui.activities.main.MainActivity;
 
@@ -28,8 +29,18 @@ public class SearchFragment extends Fragment {
 
     private FragmentSearchBinding binding;
     private MainActivity activity;
-
     private SearchAdapter adapter;
+
+    private String searchText;
+    private final Timer searchDelayTimer = new Timer(1000, () -> {
+        Handler handler = new Handler(Looper.getMainLooper());
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        executor.execute(() -> {
+            String[] result = redditApi.searchSubreddits(searchText.toString());
+            handler.post(() -> adapter.updateData(result));
+        });
+    });
 
     private final View.OnClickListener onBtnCloseClickListener = (v) -> {
         activity.onSearchFragmentBtnCloseClick();
@@ -40,13 +51,8 @@ public class SearchFragment extends Fragment {
         }
 
         @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-
-            executor.execute(() -> {
-                String[] result = redditApi.searchSubreddits(s.toString());
-                handler.post(() -> adapter.updateData(result));
-            });
+            searchText = s.toString();
+            searchDelayTimer.run();
         }
 
         @Override public void afterTextChanged(Editable s) {
