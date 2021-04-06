@@ -1,8 +1,6 @@
 package com.ed.redditapp.ui.activities.main;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -14,10 +12,6 @@ import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
 import com.ed.redditapp.lib.api.RedditApi;
 import com.ed.redditapp.ui.fragments.search.SearchFragment;
-
-import java.util.Arrays;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.inject.Inject;
 
@@ -49,14 +43,6 @@ public class MainActivity
                 .setReorderingAllowed(true)
                 .add(R.id.fragment_search, SearchFragment.class, null)
                 .commit();
-
-        Handler handler = new Handler(Looper.getMainLooper());
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-
-        executor.execute(() -> {
-            String[] result = redditApi.searchSubreddits("prizes");
-            handler.post(() -> binding.text.setText(Arrays.toString(result)));
-        });
     }
 
     public void onSearchFragmentBtnCloseClick() {

@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ed.redditapp.R;
 
-import java.util.UUID;
-
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
     private final Context context;
+
+    private String[] data;
 
     public SearchAdapter(Context context) {
         this.context = context;
@@ -28,11 +28,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        holder.setText(UUID.randomUUID().toString());
+        holder.setText(data[position]);
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        if (data == null) {
+            return 0;
+        }
+
+        return data.length;
+    }
+
+    public void updateData(String[] data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 }
