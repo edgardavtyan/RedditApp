@@ -1,9 +1,11 @@
 package com.ed.redditapp.ui.fragments.search;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,6 +25,7 @@ public class SearchFragment extends Fragment {
 
     private FragmentSearchBinding binding;
     private MainActivity activity;
+    private InputMethodManager inputMethodManager;
 
     private final View.OnClickListener onBtnCloseClickListener = v -> presenter.onBtnCloseClick(v);
     private final TextChangedWatcher searchTextWatcher = text -> presenter.onSearchTextChanged(text);
@@ -49,6 +52,10 @@ public class SearchFragment extends Fragment {
         binding.btnClose.setOnClickListener(onBtnCloseClickListener);
         binding.searchText.addTextChangedListener(searchTextWatcher);
 
+        inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        binding.getRoot().setVisibility(View.GONE);
+
         return binding.getRoot();
     }
 
@@ -57,6 +64,13 @@ public class SearchFragment extends Fragment {
     }
 
     public void close() {
-        activity.closeSearchFragment();
+        binding.getRoot().setVisibility(View.GONE);
+        inputMethodManager.hideSoftInputFromWindow(binding.searchText.getWindowToken(), 0);
+    }
+
+    public void show() {
+        binding.getRoot().setVisibility(View.VISIBLE);
+        binding.searchText.requestFocus();
+        inputMethodManager.showSoftInput(binding.searchText, InputMethodManager.SHOW_IMPLICIT);
     }
 }

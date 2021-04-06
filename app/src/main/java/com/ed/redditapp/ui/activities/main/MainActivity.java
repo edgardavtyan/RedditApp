@@ -2,7 +2,6 @@ package com.ed.redditapp.ui.activities.main;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,7 +18,10 @@ public class MainActivity
         extends AppCompatActivity
         implements Toolbar.OnMenuItemClickListener {
 
+    private static final String FRAGMENT_TAG_SEARCH = "fragment_search";
+
     private ActivityMainBinding binding;
+    private SearchFragment searchFragment;
 
     @Inject RedditApi redditApi;
 
@@ -41,19 +43,17 @@ public class MainActivity
 
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.fragment_search, SearchFragment.class, null)
+                .add(R.id.fragment_search, SearchFragment.class, null, FRAGMENT_TAG_SEARCH)
                 .commit();
-    }
-
-    public void closeSearchFragment() {
-        binding.fragmentSearch.setVisibility(View.GONE);
+        getSupportFragmentManager().executePendingTransactions();
+        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG_SEARCH);
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_search:
-                binding.fragmentSearch.setVisibility(View.VISIBLE);
+                searchFragment.show();
                 return true;
         }
         return false;
