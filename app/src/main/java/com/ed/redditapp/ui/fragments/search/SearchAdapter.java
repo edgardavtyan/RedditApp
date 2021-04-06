@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ed.redditapp.R;
+import com.ed.redditapp.lib.api.SubReddit;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
     private final Context context;
 
-    private String[] data;
+    private SubReddit[] data;
 
     public SearchAdapter(Context context) {
         this.context = context;
@@ -28,7 +29,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        holder.setText(data[position]);
+        holder.setText(data[position].getName());
+        holder.setInfo(data[position].getSubsCount());
     }
 
     @Override
@@ -40,7 +42,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder> {
         return data.length;
     }
 
-    public void updateData(String[] data) {
+    public void updateData(SubReddit[] data) {
         this.data = data;
         notifyDataSetChanged();
     }

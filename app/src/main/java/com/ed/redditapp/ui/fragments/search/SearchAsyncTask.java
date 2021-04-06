@@ -3,10 +3,11 @@ package com.ed.redditapp.ui.fragments.search;
 import com.ed.redditapp.lib.AsyncTask;
 import com.ed.redditapp.lib.Timer;
 import com.ed.redditapp.lib.api.RedditApi;
+import com.ed.redditapp.lib.api.SubReddit;
 
 public class SearchAsyncTask {
     public interface Callback {
-        void callback(String[] result);
+        void callback(SubReddit[] result);
     }
 
     private final Timer searchDelayTimer;
@@ -17,7 +18,7 @@ public class SearchAsyncTask {
     public SearchAsyncTask(RedditApi api) {
         searchDelayTimer = new Timer(1000, () -> {
             new AsyncTask().runAsync(h -> {
-                String[] result = api.searchSubreddits(searchText);
+                SubReddit[] result = api.searchSubreddits(searchText);
                 h.onUIThread(() -> searchCallback.callback(result));
             });
         });

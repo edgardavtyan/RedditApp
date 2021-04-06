@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ed.redditapp.App;
 import com.ed.redditapp.databinding.FragmentSearchBinding;
 import com.ed.redditapp.lib.TextChangedWatcher;
+import com.ed.redditapp.lib.api.SubReddit;
 import com.ed.redditapp.ui.activities.main.MainActivity;
 
 import javax.inject.Inject;
@@ -51,7 +52,7 @@ public class SearchFragment extends Fragment {
         return binding.getRoot();
     }
 
-    public void updateSearchResults(String[] data) {
+    public void updateSearchResults(SubReddit[] data) {
         adapter.updateData(data);
     }
 
