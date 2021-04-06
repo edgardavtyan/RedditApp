@@ -1,0 +1,29 @@
+package com.ed.redditapp.ui.fragments.search;
+
+import com.ed.redditapp.lib.api.RedditApi;
+
+import dagger.Module;
+import dagger.Provides;
+
+@Module
+public class SearchFragmentDaggerModule {
+    private final SearchFragment fragment;
+
+    public SearchFragmentDaggerModule(SearchFragment fragment) {
+        this.fragment = fragment;
+    }
+
+    @Provides
+    public SearchModel provideModel(RedditApi redditApi) {
+        return new SearchModel(redditApi);
+    }
+
+    @Provides
+    public SearchPresenter providePresenter(SearchModel model) {
+        return new SearchPresenter(model, fragment);
+    }
+
+    @Provides SearchAdapter provideAdapter() {
+        return new SearchAdapter(fragment.getActivity());
+    }
+}

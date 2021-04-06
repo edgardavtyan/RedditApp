@@ -45,7 +45,7 @@ public class MainActivity
                 .commit();
     }
 
-    public void onSearchFragmentBtnCloseClick() {
+    public void closeSearchFragment() {
         binding.fragmentSearch.setVisibility(View.GONE);
     }
 

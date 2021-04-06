@@ -6,7 +6,8 @@ import com.ed.redditapp.FragmentScope;
 import dagger.Component;
 
 @FragmentScope
-@Component(dependencies = AppDaggerComponent.class)
+@Component(dependencies = AppDaggerComponent.class,
+           modules = SearchFragmentDaggerModule.class)
 public interface SearchFragmentDaggerComponent {
     void inject(SearchFragment fragment);
 }
