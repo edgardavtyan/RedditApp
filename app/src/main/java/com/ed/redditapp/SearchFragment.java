@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ed.redditapp.databinding.FragmentSearchBinding;
 
@@ -25,6 +26,9 @@ public class SearchFragment extends Fragment {
         activity = (MainActivity) getActivity();
 
         binding = FragmentSearchBinding.inflate(inflater, container, false);
+
+        binding.list.setLayoutManager(new LinearLayoutManager(activity));
+        binding.list.setAdapter(new SearchAdapter(activity));
 
         binding.btnClose.setOnClickListener(onBtnCloseClickListener);
 

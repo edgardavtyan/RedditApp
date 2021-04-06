@@ -13,4 +13,9 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="MainToolbarAutocompleteTextView">
+        <item name="colorControlNormal">?colorPrimary</item>
+        <item name="colorControlActivated">?colorPrimary</item>
+    </style>
+
 </resources>
