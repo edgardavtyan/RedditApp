@@ -3,6 +3,9 @@ package com.ed.redditapp.lib.http;
 import android.net.Uri;
 import android.util.Base64;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,6 +59,16 @@ public class HttpClient {
         }
 
         return result;
+    }
+
+    public JSONObject getJson(String url) {
+        try {
+            return new JSONObject(get(url));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private String getData(HttpURLConnection connection) throws IOException {
