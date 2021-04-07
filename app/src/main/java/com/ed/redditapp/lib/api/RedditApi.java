@@ -1,11 +1,10 @@
 package com.ed.redditapp.lib.api;
 
-import android.text.Html;
-
 import androidx.annotation.Nullable;
 
 import com.ed.redditapp.lib.http.HttpClient;
 import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.ui.postlist.PostThumbnail;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -80,19 +79,40 @@ public class RedditApi {
                             .getJSONArray("resolutions");
 
                     if (thumbsJson.length() < 3) {
-                        post.setThumbnailSmallUrl(postJson.getString("url"));
+                        PostThumbnail thumbSmall = new PostThumbnail();
+                        JSONObject thumbSmallJson = postJson
+                                .getJSONObject("preview")
+                                .getJSONArray("images")
+                                .getJSONObject(0)
+                                .getJSONObject("source");
+                        thumbSmall.setWidth(thumbSmallJson.getInt("width"));
+                        thumbSmall.setHeight(thumbSmallJson.getInt("height"));
+                        thumbSmall.setUrl(thumbSmallJson.getString("url"));
+                        post.setThumbnailSmall(thumbSmall);
                     }
 
                     if (thumbsJson.length() >= 4) {
-                        post.setThumbnail320Url(Html.fromHtml(thumbsJson.getJSONObject(2).getString("url")).toString());
+                        PostThumbnail thumb = new PostThumbnail();
+                        thumb.setWidth(thumbsJson.getJSONObject(2).getInt("width"));
+                        thumb.setHeight(thumbsJson.getJSONObject(2).getInt("height"));
+                        thumb.setUrl(thumbsJson.getJSONObject(2).getString("url"));
+                        post.setThumbnail320(thumb);
                     }
 
                     if (thumbsJson.length() >= 5) {
-                        post.setThumbnail640Url(Html.fromHtml(thumbsJson.getJSONObject(3).getString("url")).toString());
+                        PostThumbnail thumb = new PostThumbnail();
+                        thumb.setWidth(thumbsJson.getJSONObject(3).getInt("width"));
+                        thumb.setHeight(thumbsJson.getJSONObject(3).getInt("height"));
+                        thumb.setUrl(thumbsJson.getJSONObject(3).getString("url"));
+                        post.setThumbnail320(thumb);
                     }
 
                     if (thumbsJson.length() >= 6) {
-                        post.setThumbnail960Url(Html.fromHtml(thumbsJson.getJSONObject(4).getString("url")).toString());
+                        PostThumbnail thumb = new PostThumbnail();
+                        thumb.setWidth(thumbsJson.getJSONObject(3).getInt("width"));
+                        thumb.setHeight(thumbsJson.getJSONObject(3).getInt("height"));
+                        thumb.setUrl(thumbsJson.getJSONObject(3).getString("url"));
+                        post.setThumbnail320(thumb);
                     }
                 }
 

@@ -1,6 +1,10 @@
 package com.ed.redditapp.ui.postlist;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.View;
 
@@ -43,7 +47,16 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
         binding.comments.setText(String.format(pattern, commentsCount));
     }
 
-    public void setThumbnail(String url) {
-        Glide.with(context).load(url).into(binding.thumbnail);
+    public void setThumbnail(PostThumbnail thumbnail) {
+        if (thumbnail == null) {
+            return;
+        }
+
+        Bitmap b = Bitmap.createBitmap(thumbnail.getWidth(), thumbnail.getHeight(), Bitmap.Config.ARGB_8888);
+        Drawable d = new BitmapDrawable(context.getResources(), b);
+        Glide.with(context)
+                .load(Html.fromHtml(thumbnail.getUrl()).toString())
+                .placeholder(d)
+                .into(binding.thumbnail);
     }
 }
