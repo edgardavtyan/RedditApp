@@ -68,7 +68,7 @@ public class RedditApi {
                 post.setUsername(postJson.getString("author"));
                 post.setCommentsCount(postJson.getInt("num_comments"));
                 post.setPoints(postJson.getInt("ups"));
-                post.setTimestamp(postJson.getLong("created"));
+                post.setTimestamp(postJson.getLong("created_utc"));
                 posts[i] = post;
             }
 
