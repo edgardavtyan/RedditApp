@@ -3,7 +3,7 @@ package com.ed.redditapp.lib.api;
 import androidx.annotation.Nullable;
 
 import com.ed.redditapp.lib.http.HttpClient;
-import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.ui.postlist.PostListItem;
 import com.ed.redditapp.ui.postlist.PostThumbnail;
 
 import org.json.JSONArray;
@@ -54,17 +54,17 @@ public class RedditApi {
         }
     }
 
-    public Post[] getMainPagePosts() {
+    public PostListItem[] getMainPagePosts() {
         try {
             JSONArray postsJson = httpClient
                     .getJson(URL_MAIN_PAGE)
                     .getJSONObject("data")
                     .getJSONArray("children");
 
-            Post[] posts = new Post[postsJson.length()];
+            PostListItem[] posts = new PostListItem[postsJson.length()];
             for (int i = 0; i < postsJson.length(); i++) {
                 JSONObject postJson = postsJson.getJSONObject(i).getJSONObject("data");
-                Post post = new Post();
+                PostListItem post = new PostListItem();
                 post.setTitle(postJson.getString("title"));
                 post.setUsername(postJson.getString("author"));
                 post.setCommentsCount(postJson.getInt("num_comments"));

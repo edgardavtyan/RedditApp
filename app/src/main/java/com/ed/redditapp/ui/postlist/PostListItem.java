@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Post {
+public class PostListItem {
     private String title;
     private String username;
     private PostThumbnail thumbnailSmall;

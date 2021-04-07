@@ -13,7 +13,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     private static final int VIEW_TYPE_FIRST = 1;
     private static final int VIEW_TYPE_DEFAULT = 0;
 
-    private Post[] posts;
+    private PostListItem[] posts;
     private int itemViewWidth;
 
     @NonNull
@@ -30,7 +30,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PostListViewHolder holder, int position) {
-        Post post = posts[position];
+        PostListItem post = posts[position];
         holder.setTitle(post.getTitle());
         holder.setCommentsCount(post.getCommentsCount());
         holder.setInfo(post.getPoints(), post.getTimestamp(), post.getUsername());
@@ -54,7 +54,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
             return VIEW_TYPE_DEFAULT;
     }
 
-    public void updateData(Post[] posts) {
+    public void updateData(PostListItem[] posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }

@@ -11,7 +11,7 @@ import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
 import com.ed.redditapp.ui.fragments.search.SearchFragment;
-import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.ui.postlist.PostListItem;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
 
 import javax.inject.Inject;
@@ -68,7 +68,7 @@ public class MainActivity
         return false;
     }
 
-    public void updatePosts(Post[] posts) {
+    public void updatePosts(PostListItem[] posts) {
         postListAdapter.updateData(posts);
     }
 }
