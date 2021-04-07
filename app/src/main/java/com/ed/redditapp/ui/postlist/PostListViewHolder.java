@@ -1,9 +1,6 @@
 package com.ed.redditapp.ui.postlist;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -52,11 +49,13 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
             return;
         }
 
-        Bitmap b = Bitmap.createBitmap(thumbnail.getWidth(), thumbnail.getHeight(), Bitmap.Config.ARGB_8888);
-        Drawable d = new BitmapDrawable(context.getResources(), b);
-        Glide.with(context)
-                .load(Html.fromHtml(thumbnail.getUrl()).toString())
-                .placeholder(d)
-                .into(binding.thumbnail);
+        binding.thumbnail.post(() -> {
+            float ratio = (float) thumbnail.getWidth() / binding.thumbnail.getWidth();
+            int height = (int) Math.ceil(thumbnail.getHeight() / ratio);
+            Glide.with(context)
+                    .load(Html.fromHtml(thumbnail.getUrl()).toString())
+                    .override(binding.getRoot().getWidth(), height)
+                    .into(binding.thumbnail);
+        });
     }
 }
