@@ -1,6 +1,7 @@
 package com.ed.redditapp.ui.activities.subreddit;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,20 @@ public class SubRedditActivity extends AppCompatActivity {
 
         String subredditTitle = getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME);
         presenter.onActivityCreated(subredditTitle);
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void updateSubredditInfo(SubReddit subreddit) {
