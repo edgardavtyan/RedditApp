@@ -24,4 +24,9 @@
         <item name="colorControlActivated">?colorPrimary</item>
     </style>
 
+    <style name="ClickableRipplePrimary">
+        <item name="colorControlHighlight">#AABB86FC</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
 </resources>

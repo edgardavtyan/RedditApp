@@ -2,7 +2,7 @@
 <resources>
 
     <string name="search_listitem_subs_pattern">%,d subscribers</string>
-    <string name="post_info_pattern">%,d Points\n%s ago by u/%s</string>
+    <string name="post_info_pattern">%,d Points\n%s by u/%s</string>
     <string name="post_comments_pattern">%d Comments</string>
 
 </resources>
