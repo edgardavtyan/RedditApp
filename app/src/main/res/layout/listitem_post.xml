@@ -33,6 +33,13 @@
         android:textSize="14sp"
         tools:text="48,765 points\n911 hours, 6 mins ago by u/username" />
 
+    <ImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        />
+
     <TextView
         android:id="@+id/comments"
         android:layout_width="wrap_content"

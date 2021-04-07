@@ -1,5 +1,7 @@
 package com.ed.redditapp.lib.api;
 
+import android.text.Html;
+
 import androidx.annotation.Nullable;
 
 import com.ed.redditapp.lib.http.HttpClient;
@@ -69,6 +71,31 @@ public class RedditApi {
                 post.setCommentsCount(postJson.getInt("num_comments"));
                 post.setPoints(postJson.getInt("ups"));
                 post.setTimestamp(postJson.getLong("created_utc"));
+
+                if (postJson.has("preview")) {
+                    JSONArray thumbsJson = postJson
+                            .getJSONObject("preview")
+                            .getJSONArray("images")
+                            .getJSONObject(0)
+                            .getJSONArray("resolutions");
+
+                    if (thumbsJson.length() < 3) {
+                        post.setThumbnailSmallUrl(postJson.getString("url"));
+                    }
+
+                    if (thumbsJson.length() >= 4) {
+                        post.setThumbnail320Url(Html.fromHtml(thumbsJson.getJSONObject(2).getString("url")).toString());
+                    }
+
+                    if (thumbsJson.length() >= 5) {
+                        post.setThumbnail640Url(Html.fromHtml(thumbsJson.getJSONObject(3).getString("url")).toString());
+                    }
+
+                    if (thumbsJson.length() >= 6) {
+                        post.setThumbnail960Url(Html.fromHtml(thumbsJson.getJSONObject(4).getString("url")).toString());
+                    }
+                }
+
                 posts[i] = post;
             }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ListitemPostBinding;
 
@@ -40,5 +41,9 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
     public void setCommentsCount(int commentsCount) {
         String pattern = context.getString(R.string.post_comments_pattern);
         binding.comments.setText(String.format(pattern, commentsCount));
+    }
+
+    public void setThumbnail(String url) {
+        Glide.with(context).load(url).into(binding.thumbnail);
     }
 }

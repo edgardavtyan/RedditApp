@@ -25,6 +25,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
         holder.setTitle(post.getTitle());
         holder.setCommentsCount(post.getCommentsCount());
         holder.setInfo(post.getPoints(), post.getTimestamp(), post.getUsername());
+        holder.setThumbnail(post.getThumbnail960Url());
     }
 
     @Override
