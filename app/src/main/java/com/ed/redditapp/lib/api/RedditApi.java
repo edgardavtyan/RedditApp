@@ -3,6 +3,7 @@ package com.ed.redditapp.lib.api;
 import androidx.annotation.Nullable;
 
 import com.ed.redditapp.lib.http.HttpClient;
+import com.ed.redditapp.ui.postlist.Post;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,6 +11,7 @@ import org.json.JSONObject;
 public class RedditApi {
     private static final String URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on";
     private static final String URL_SUBREDDIT = "https://www.reddit.com/r/%s/about.json";
+    private static final String URL_MAIN_PAGE = "https://www.reddit.com/r/popular.json";
     private final HttpClient httpClient;
 
     public RedditApi() {
@@ -46,6 +48,31 @@ public class RedditApi {
             subreddit.setTitle(json.getString("title"));
             subreddit.setDescription(json.getString("public_description"));
             return subreddit;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Post[] getMainPagePosts() {
+        try {
+            JSONArray postsJson = httpClient
+                    .getJson(URL_MAIN_PAGE)
+                    .getJSONObject("data")
+                    .getJSONArray("children");
+
+            Post[] posts = new Post[postsJson.length()];
+            for (int i = 0; i < postsJson.length(); i++) {
+                JSONObject postJson = postsJson.getJSONObject(i).getJSONObject("data");
+                Post post = new Post();
+                post.setTitle(postJson.getString("title"));
+                post.setUsername(postJson.getString("author"));
+                post.setCommentsCount(postJson.getInt("num_comments"));
+                post.setPoints(postJson.getInt("ups"));
+                post.setTimestamp(postJson.getLong("created"));
+                posts[i] = post;
+            }
+
+            return posts;
         } catch (Exception e) {
             return null;
         }

@@ -6,7 +6,8 @@ import com.ed.redditapp.AppDaggerComponent;
 import dagger.Component;
 
 @ActivityScope
-@Component(dependencies = AppDaggerComponent.class)
+@Component(dependencies = AppDaggerComponent.class,
+           modules = MainActivityDaggerModule.class)
 public interface MainActivityDaggerComponent {
     void inject(MainActivity activity);
 }

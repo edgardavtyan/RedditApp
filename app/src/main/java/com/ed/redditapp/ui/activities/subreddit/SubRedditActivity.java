@@ -53,8 +53,8 @@ public class SubRedditActivity extends AppCompatActivity {
     }
 
     public void updateSubredditInfo(SubReddit subreddit) {
-        binding.toolbar.setTitle(subreddit.getName());
-        binding.title.setText(subreddit.getTitle());
+        binding.toolbar.setTitle(subreddit.getName().trim());
+        binding.title.setText(subreddit.getTitle().trim());
         binding.subsCount.setText(String.format(getString(R.string.search_listitem_subs_pattern), subreddit.getSubsCount()));
     }
 }
