@@ -1,5 +1,6 @@
 package com.ed.redditapp.ui.activities.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -10,11 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
+import com.ed.redditapp.ui.activities.subreddit.SubRedditActivity;
 import com.ed.redditapp.ui.fragments.search.SearchFragment;
-import com.ed.redditapp.ui.postlist.PostListItem;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
+import com.ed.redditapp.ui.postlist.PostListItem;
 
 import javax.inject.Inject;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class MainActivity
         extends AppCompatActivity
@@ -48,6 +52,8 @@ public class MainActivity
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(postListAdapter);
 
+        postListAdapter.setInfoClickListener(presenter::onPostInfoClicked);
+
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .add(R.id.fragment_search, SearchFragment.class, null, FRAGMENT_TAG_SEARCH)
@@ -74,5 +80,12 @@ public class MainActivity
 
     public void updateSubredditIcons(String icon, int position) {
         postListAdapter.updateIcon(icon, position);
+    }
+
+    public void gotoSubreddit(String subredditName) {
+        Intent intent = new Intent(this, SubRedditActivity.class);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(SubRedditActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+        startActivity(intent);
     }
 }

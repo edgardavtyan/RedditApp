@@ -11,12 +11,21 @@ import com.ed.redditapp.R;
 
 import java.util.List;
 
+import lombok.Setter;
+
 public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     private static final int VIEW_TYPE_FIRST = 1;
     private static final int VIEW_TYPE_DEFAULT = 0;
     private static final Integer PAYLOAD_ICON_CHANGED = 1;
 
+    public interface ClickListener {
+        void onClick(PostListItem post);
+    }
+
     private PostListItem[] posts;
+
+    @Setter
+    private ClickListener infoClickListener;
 
     @NonNull
     @Override
@@ -34,6 +43,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
         holder.setThumbnail(post.getLargestThumbnail());
         holder.setSubreddit(post.getSubreddit());
         holder.setSubredditIcon(post.getSubredditIconUrl());
+        holder.setInfoClickListener(v -> infoClickListener.onClick(post));
     }
 
     @Override

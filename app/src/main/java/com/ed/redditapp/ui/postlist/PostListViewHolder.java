@@ -21,8 +21,8 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
 
     public PostListViewHolder(@NonNull View itemView) {
         super(itemView);
-        binding = ListitemPostBinding.bind(itemView);
         context = itemView.getContext();
+        binding = ListitemPostBinding.bind(itemView);
     }
 
     public void setTitle(String title) {
@@ -72,5 +72,9 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
                     .override(binding.getRoot().getWidth(), height)
                     .into(binding.thumbnail);
         });
+    }
+
+    public void setInfoClickListener(View.OnClickListener listener) {
+        binding.topWrapper.setOnClickListener(listener);
     }
 }
