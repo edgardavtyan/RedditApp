@@ -56,5 +56,6 @@ public class SubRedditActivity extends AppCompatActivity {
         binding.toolbar.setTitle(subreddit.getName().trim());
         binding.title.setText(subreddit.getTitle().trim());
         binding.subsCount.setText(String.format(getString(R.string.search_listitem_subs_pattern), subreddit.getSubsCount()));
+        binding.description.setText(subreddit.getDescription().replaceAll("\\n", ""));
     }
 }
