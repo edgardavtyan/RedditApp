@@ -43,12 +43,12 @@ public class SubRedditActivity extends AppCompatActivity {
                 .inject(this);
 
         String subredditTitle = getIntent().getStringExtra(EXTRA_SUBREDDIT_NAME);
-        presenter.onActivityCreated(subredditTitle);
 
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        adapter.setDisplayIcon(false);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(adapter);
         binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -59,6 +59,8 @@ public class SubRedditActivity extends AppCompatActivity {
                 binding.shadow.setTranslationY(-parallax + binding.header.getHeight());
             }
         });
+
+        presenter.onActivityCreated(subredditTitle);
     }
 
     @Override

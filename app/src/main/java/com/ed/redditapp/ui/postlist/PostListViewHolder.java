@@ -37,7 +37,9 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
 
         String pattern = context.getString(R.string.post_info_pattern);
         String post = String.format(pattern, points, niceDateStr, username);
+
         binding.info.setText(post);
+        binding.infoNoIcon.setText(post);
     }
 
     public void setSubreddit(String subreddit) {
@@ -72,6 +74,16 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
                     .override(binding.getRoot().getWidth(), height)
                     .into(binding.thumbnail);
         });
+    }
+
+    public void setDisplayIcon(boolean isDisplayIcon) {
+        if (isDisplayIcon) {
+            binding.topWrapper.setVisibility(View.VISIBLE);
+            binding.infoNoIcon.setVisibility(View.GONE);
+        } else {
+            binding.topWrapper.setVisibility(View.GONE);
+            binding.infoNoIcon.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setInfoClickListener(View.OnClickListener listener) {
