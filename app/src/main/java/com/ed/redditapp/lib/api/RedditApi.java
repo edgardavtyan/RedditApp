@@ -1,5 +1,7 @@
 package com.ed.redditapp.lib.api;
 
+import android.text.Html;
+
 import androidx.annotation.Nullable;
 
 import com.ed.redditapp.lib.http.HttpClient;
@@ -49,7 +51,8 @@ public class RedditApi {
             subreddit.setSubsCount(json.getInt("subscribers"));
             subreddit.setTitle(json.getString("title"));
             subreddit.setDescription(json.getString("public_description"));
-            subreddit.setIconUrl(json.getString("icon_img"));
+            subreddit.setIconUrl(getSubredditIconUrl(subredditName));
+
             return subreddit;
         } catch (Exception e) {
             return null;
@@ -118,10 +121,12 @@ public class RedditApi {
 
     public String getSubredditIconUrl(String subreddit) {
         try {
-            return httpClient
-                    .getJson(String.format(URL_SUBREDDIT_ABOUT, subreddit))
-                    .getJSONObject("data")
-                    .getString("icon_img");
+            String url = String.format(URL_SUBREDDIT_ABOUT, subreddit);
+            JSONObject json = httpClient.getJson(url).getJSONObject("data");
+
+            String iconUrl = Html.fromHtml(json.getString("icon_img")).toString();
+            String communityIcon = Html.fromHtml(json.getString("community_icon")).toString();
+            return !iconUrl.isEmpty() ? iconUrl : communityIcon;
         } catch (Exception e) {
             return null;
         }
