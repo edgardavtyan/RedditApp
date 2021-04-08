@@ -3,9 +3,11 @@ package com.ed.redditapp.ui.activities.subreddit;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -47,8 +49,20 @@ public class SubRedditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        binding.header.post(() -> {
+            binding.list.addItemDecoration(new FirstItemOffsetDecoration(binding.header.getHeight()));
+            binding.shadow.setY(binding.header.getHeight());
+        });
+
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(adapter);
+        binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                binding.header.setY(binding.header.getY() - dy * 0.7f);
+                binding.shadow.setY(binding.shadow.getY() - dy * 0.7f);
+            }
+        });
     }
 
     @Override
