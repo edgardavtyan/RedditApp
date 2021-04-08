@@ -40,10 +40,10 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         activity = (MainActivity) getActivity();
 
-        DaggerSearchFragmentDaggerComponent
+        DaggerSearchDaggerComponent
                 .builder()
                 .appDaggerComponent(((App) activity.getApplication()).getAppComponent())
-                .searchFragmentDaggerModule(new SearchFragmentDaggerModule(this))
+                .searchFragmentDaggerModule(new SearchDaggerModule(this))
                 .build()
                 .inject(this);
 

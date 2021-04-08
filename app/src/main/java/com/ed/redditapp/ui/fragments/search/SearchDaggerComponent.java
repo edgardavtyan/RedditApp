@@ -7,7 +7,7 @@ import dagger.Component;
 
 @FragmentScope
 @Component(dependencies = AppDaggerComponent.class,
-           modules = SearchFragmentDaggerModule.class)
-public interface SearchFragmentDaggerComponent {
+           modules = SearchDaggerModule.class)
+public interface SearchDaggerComponent {
     void inject(SearchFragment fragment);
 }

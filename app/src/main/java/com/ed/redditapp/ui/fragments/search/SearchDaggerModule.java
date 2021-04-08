@@ -7,10 +7,10 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class SearchFragmentDaggerModule {
+public class SearchDaggerModule {
     private final SearchFragment fragment;
 
-    public SearchFragmentDaggerModule(SearchFragment fragment) {
+    public SearchDaggerModule(SearchFragment fragment) {
         this.fragment = fragment;
     }
 
