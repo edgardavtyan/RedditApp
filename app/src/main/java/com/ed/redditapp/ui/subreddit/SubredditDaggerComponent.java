@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.activities.main;
+package com.ed.redditapp.ui.subreddit;
 
 import com.ed.redditapp.ActivityScope;
 import com.ed.redditapp.AppDaggerComponent;
@@ -7,7 +7,7 @@ import dagger.Component;
 
 @ActivityScope
 @Component(dependencies = AppDaggerComponent.class,
-           modules = MainDaggerModule.class)
-public interface MainDaggerComponent {
-    void inject(MainActivity activity);
+           modules = SubredditDaggerModule.class)
+public interface SubredditDaggerComponent {
+    void inject(SubredditActivity activity);
 }

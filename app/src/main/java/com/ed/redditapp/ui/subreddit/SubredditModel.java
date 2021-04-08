@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.activities.subreddit;
+package com.ed.redditapp.ui.subreddit;
 
 import com.ed.redditapp.lib.api.RedditApi;
 

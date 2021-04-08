@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.activities.subreddit;
+package com.ed.redditapp.ui.subreddit;
 
 public class SubredditPresenter {
     private final SubredditActivity view;

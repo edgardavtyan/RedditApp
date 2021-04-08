@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.fragments.search;
+package com.ed.redditapp.ui.search;
 
 import com.ed.redditapp.lib.AsyncTask;
 import com.ed.redditapp.lib.Timer;

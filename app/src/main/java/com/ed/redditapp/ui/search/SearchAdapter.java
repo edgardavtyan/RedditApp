@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.fragments.search;
+package com.ed.redditapp.ui.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;

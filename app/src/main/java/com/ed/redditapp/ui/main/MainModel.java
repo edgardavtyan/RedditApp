@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.activities.main;
+package com.ed.redditapp.ui.main;
 
 import com.ed.redditapp.lib.api.RedditApi;
 import com.ed.redditapp.ui.postlist.Post;

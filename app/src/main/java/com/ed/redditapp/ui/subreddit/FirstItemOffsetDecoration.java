@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.activities.subreddit;
+package com.ed.redditapp.ui.subreddit;
 
 import android.graphics.Rect;
 import android.view.View;

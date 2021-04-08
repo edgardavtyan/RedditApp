@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.fragments.search;
+package com.ed.redditapp.ui.search;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +16,8 @@ import com.ed.redditapp.App;
 import com.ed.redditapp.databinding.FragmentSearchBinding;
 import com.ed.redditapp.lib.TextChangedWatcher;
 import com.ed.redditapp.lib.api.SubReddit;
-import com.ed.redditapp.ui.activities.main.MainActivity;
-import com.ed.redditapp.ui.activities.subreddit.SubredditActivity;
+import com.ed.redditapp.ui.main.MainActivity;
+import com.ed.redditapp.ui.subreddit.SubredditActivity;
 
 import javax.inject.Inject;
 

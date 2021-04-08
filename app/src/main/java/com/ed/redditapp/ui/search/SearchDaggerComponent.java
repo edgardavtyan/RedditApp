@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.fragments.search;
+package com.ed.redditapp.ui.search;
 
 import com.ed.redditapp.AppDaggerComponent;
 import com.ed.redditapp.FragmentScope;

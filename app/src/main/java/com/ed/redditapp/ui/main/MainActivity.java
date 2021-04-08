@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.activities.main;
+package com.ed.redditapp.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
-import com.ed.redditapp.ui.activities.subreddit.SubredditActivity;
-import com.ed.redditapp.ui.fragments.search.SearchFragment;
-import com.ed.redditapp.ui.postlist.PostListAdapter;
 import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.ui.postlist.PostListAdapter;
+import com.ed.redditapp.ui.search.SearchFragment;
+import com.ed.redditapp.ui.subreddit.SubredditActivity;
 
 import javax.inject.Inject;
 

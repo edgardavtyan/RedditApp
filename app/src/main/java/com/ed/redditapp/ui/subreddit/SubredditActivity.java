@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.activities.subreddit;
+package com.ed.redditapp.ui.subreddit;
 
 import android.os.Bundle;
 import android.view.MenuItem;
