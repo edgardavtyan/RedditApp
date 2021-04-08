@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivitySubredditBinding;
@@ -64,6 +66,10 @@ public class SubRedditActivity extends AppCompatActivity {
         binding.title.setText(subreddit.getTitle().trim());
         binding.subsCount.setText(String.format(getString(R.string.search_listitem_subs_pattern), subreddit.getSubsCount()));
         binding.description.setText(subreddit.getDescription().replaceAll("\\n", ""));
+        Glide.with(this)
+                .load(subreddit.getIconUrl())
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.icon);
     }
 
     public void updatePosts(PostListItem[] posts) {
