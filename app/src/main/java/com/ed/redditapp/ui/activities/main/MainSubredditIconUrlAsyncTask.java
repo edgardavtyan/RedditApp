@@ -4,14 +4,14 @@ import com.ed.redditapp.lib.AsyncTask;
 import com.ed.redditapp.lib.api.RedditApi;
 import com.ed.redditapp.ui.postlist.Post;
 
-public class MainPageSubredditIconUrlAsyncTask {
+public class MainSubredditIconUrlAsyncTask {
     interface Callback {
         void callback(String iconUrl, int position);
     }
 
     private final RedditApi redditApi;
 
-    public MainPageSubredditIconUrlAsyncTask(RedditApi redditApi) {
+    public MainSubredditIconUrlAsyncTask(RedditApi redditApi) {
         this.redditApi = redditApi;
     }
 

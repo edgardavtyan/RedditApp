@@ -30,7 +30,7 @@ public class MainActivity
     private SearchFragment searchFragment;
 
     @Inject PostListAdapter postListAdapter;
-    @Inject MainActivityPresenter presenter;
+    @Inject MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +39,10 @@ public class MainActivity
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        DaggerMainActivityDaggerComponent
+        DaggerMainDaggerComponent
                 .builder()
                 .appDaggerComponent(((App) getApplication()).getAppComponent())
-                .mainActivityDaggerModule(new MainActivityDaggerModule(this))
+                .mainActivityDaggerModule(new MainDaggerModule(this))
                 .build()
                 .inject(this);
 

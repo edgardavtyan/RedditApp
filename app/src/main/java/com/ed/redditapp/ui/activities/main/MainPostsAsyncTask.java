@@ -4,14 +4,14 @@ import com.ed.redditapp.lib.AsyncTask;
 import com.ed.redditapp.lib.api.RedditApi;
 import com.ed.redditapp.ui.postlist.Post;
 
-public class MainPagePostsAsyncTask {
+public class MainPostsAsyncTask {
     public interface Callback {
         void callback(Post[] posts);
     }
 
     private final RedditApi redditApi;
 
-    public MainPagePostsAsyncTask(RedditApi redditApi) {
+    public MainPostsAsyncTask(RedditApi redditApi) {
         this.redditApi = redditApi;
     }
 

@@ -2,11 +2,11 @@ package com.ed.redditapp.ui.activities.main;
 
 import com.ed.redditapp.ui.postlist.Post;
 
-public class MainActivityPresenter {
+public class MainPresenter {
     private final MainActivity view;
-    private final MainActivityModel model;
+    private final MainModel model;
 
-    public MainActivityPresenter(MainActivity view, MainActivityModel model) {
+    public MainPresenter(MainActivity view, MainModel model) {
         this.view = view;
         this.model = model;
     }

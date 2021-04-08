@@ -8,10 +8,10 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class MainActivityDaggerModule {
+public class MainDaggerModule {
     private final MainActivity activity;
 
-    public MainActivityDaggerModule(MainActivity activity) {
+    public MainDaggerModule(MainActivity activity) {
         this.activity = activity;
     }
 
@@ -23,13 +23,13 @@ public class MainActivityDaggerModule {
 
     @Provides
     @ActivityScope
-    public MainActivityPresenter providePresenter(MainActivityModel model) {
-        return new MainActivityPresenter(activity, model);
+    public MainPresenter providePresenter(MainModel model) {
+        return new MainPresenter(activity, model);
     }
 
     @Provides
     @ActivityScope
-    public MainActivityModel provideModel(RedditApi redditApi) {
-        return new MainActivityModel(redditApi);
+    public MainModel provideModel(RedditApi redditApi) {
+        return new MainModel(redditApi);
     }
 }
