@@ -17,17 +17,11 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     private static final Integer PAYLOAD_ICON_CHANGED = 1;
 
     private PostListItem[] posts;
-    private int itemViewWidth;
 
     @NonNull
     @Override
     public PostListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.listitem_post, parent, false);
-
-        if (viewType == VIEW_TYPE_FIRST) {
-            itemView.post(() -> itemViewWidth = itemView.getWidth());
-        }
-
         return new PostListViewHolder(itemView);
     }
 
