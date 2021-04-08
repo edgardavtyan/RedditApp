@@ -8,6 +8,8 @@ import lombok.Setter;
 public class PostListItem {
     private String title;
     private String username;
+    private String subreddit;
+    private String subredditIconUrl;
     private PostThumbnail thumbnailSmall;
     private PostThumbnail thumbnail320;
     private PostThumbnail thumbnail640;

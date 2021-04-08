@@ -10,6 +10,9 @@ public class MainActivityPresenter {
     }
 
     public void onActivityLoaded() {
-        model.getMainPagePosts(view::updatePosts);
+        model.getMainPagePosts((posts) -> {
+            view.updatePosts(posts);
+            model.getMainPageSubredditIcons(view::updateSubredditIcons);
+        });
     }
 }

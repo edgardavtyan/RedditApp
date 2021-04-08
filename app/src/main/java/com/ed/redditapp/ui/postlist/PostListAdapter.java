@@ -9,9 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ed.redditapp.R;
 
+import java.util.List;
+
 public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     private static final int VIEW_TYPE_FIRST = 1;
     private static final int VIEW_TYPE_DEFAULT = 0;
+    private static final Integer PAYLOAD_ICON_CHANGED = 1;
 
     private PostListItem[] posts;
     private int itemViewWidth;
@@ -35,6 +38,20 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
         holder.setCommentsCount(post.getCommentsCount());
         holder.setInfo(post.getPoints(), post.getTimestamp(), post.getUsername());
         holder.setThumbnail(post.getLargestThumbnail());
+        holder.setSubreddit(post.getSubreddit());
+        holder.setSubredditIcon(post.getSubredditIconUrl());
+    }
+
+    @Override
+    public void onBindViewHolder(
+            @NonNull PostListViewHolder holder,
+            int position,
+            @NonNull List<Object> payloads) {
+        if (payloads.size() == 0) {
+            super.onBindViewHolder(holder, position, payloads);
+        } else {
+            holder.setSubredditIcon(posts[position].getSubredditIconUrl());
+        }
     }
 
     @Override
@@ -57,5 +74,10 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     public void updateData(PostListItem[] posts) {
         this.posts = posts;
         notifyDataSetChanged();
+    }
+
+    public void updateIcon(String iconUrl, int position) {
+        posts[position].setSubredditIconUrl(iconUrl);
+        notifyItemChanged(position, PAYLOAD_ICON_CHANGED);
     }
 }

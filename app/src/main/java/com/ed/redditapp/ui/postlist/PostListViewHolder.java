@@ -39,6 +39,14 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
         binding.info.setText(post);
     }
 
+    public void setSubreddit(String subreddit) {
+        binding.subreddit.setText(subreddit);
+    }
+
+    public void setSubredditIcon(String iconUrl) {
+        Glide.with(context).load(iconUrl).into(binding.subredditIcon);
+    }
+
     public void setCommentsCount(int commentsCount) {
         String pattern = context.getString(R.string.post_comments_pattern);
         binding.comments.setText(String.format(pattern, commentsCount));
@@ -46,7 +54,10 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
 
     public void setThumbnail(PostThumbnail thumbnail) {
         if (thumbnail == null) {
+            binding.thumbnail.setVisibility(View.GONE);
             return;
+        } else {
+            binding.thumbnail.setVisibility(View.VISIBLE);
         }
 
         binding.thumbnail.post(() -> {

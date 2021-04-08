@@ -71,4 +71,8 @@ public class MainActivity
     public void updatePosts(PostListItem[] posts) {
         postListAdapter.updateData(posts);
     }
+
+    public void updateSubredditIcons(String icon, int position) {
+        postListAdapter.updateIcon(icon, position);
+    }
 }

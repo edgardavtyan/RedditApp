@@ -7,11 +7,12 @@ import com.ed.redditapp.ui.postlist.PostListItem;
 import com.ed.redditapp.ui.postlist.PostThumbnail;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RedditApi {
     private static final String URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on";
-    private static final String URL_SUBREDDIT = "https://www.reddit.com/r/%s/about.json";
+    private static final String URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json";
     private static final String URL_MAIN_PAGE = "https://www.reddit.com/r/popular.json";
     private final HttpClient httpClient;
 
@@ -40,7 +41,7 @@ public class RedditApi {
 
     public SubReddit getSubredditInfo(String subredditName) {
         try {
-            String url = String.format(URL_SUBREDDIT, subredditName);
+            String url = String.format(URL_SUBREDDIT_ABOUT, subredditName);
             JSONObject json = httpClient.getJson(url).getJSONObject("data");
 
             SubReddit subreddit = new SubReddit();
@@ -48,6 +49,7 @@ public class RedditApi {
             subreddit.setSubsCount(json.getInt("subscribers"));
             subreddit.setTitle(json.getString("title"));
             subreddit.setDescription(json.getString("public_description"));
+            subreddit.setIconUrl(json.getString("icon_img"));
             return subreddit;
         } catch (Exception e) {
             return null;
@@ -67,6 +69,7 @@ public class RedditApi {
                 PostListItem post = new PostListItem();
                 post.setTitle(postJson.getString("title"));
                 post.setUsername(postJson.getString("author"));
+                post.setSubreddit(postJson.getString("subreddit"));
                 post.setCommentsCount(postJson.getInt("num_comments"));
                 post.setPoints(postJson.getInt("ups"));
                 post.setTimestamp(postJson.getLong("created_utc"));
@@ -92,27 +95,15 @@ public class RedditApi {
                     }
 
                     if (thumbsJson.length() >= 4) {
-                        PostThumbnail thumb = new PostThumbnail();
-                        thumb.setWidth(thumbsJson.getJSONObject(2).getInt("width"));
-                        thumb.setHeight(thumbsJson.getJSONObject(2).getInt("height"));
-                        thumb.setUrl(thumbsJson.getJSONObject(2).getString("url"));
-                        post.setThumbnail320(thumb);
+                        post.setThumbnail320(getPostThumbnail(thumbsJson, 2));
                     }
 
                     if (thumbsJson.length() >= 5) {
-                        PostThumbnail thumb = new PostThumbnail();
-                        thumb.setWidth(thumbsJson.getJSONObject(3).getInt("width"));
-                        thumb.setHeight(thumbsJson.getJSONObject(3).getInt("height"));
-                        thumb.setUrl(thumbsJson.getJSONObject(3).getString("url"));
-                        post.setThumbnail320(thumb);
+                        post.setThumbnail640(getPostThumbnail(thumbsJson, 3));
                     }
 
                     if (thumbsJson.length() >= 6) {
-                        PostThumbnail thumb = new PostThumbnail();
-                        thumb.setWidth(thumbsJson.getJSONObject(3).getInt("width"));
-                        thumb.setHeight(thumbsJson.getJSONObject(3).getInt("height"));
-                        thumb.setUrl(thumbsJson.getJSONObject(3).getString("url"));
-                        post.setThumbnail320(thumb);
+                        post.setThumbnail960(getPostThumbnail(thumbsJson, 4));
                     }
                 }
 
@@ -123,5 +114,24 @@ public class RedditApi {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public String getSubredditIconUrl(String subreddit) {
+        try {
+            return httpClient
+                    .getJson(String.format(URL_SUBREDDIT_ABOUT, subreddit))
+                    .getJSONObject("data")
+                    .getString("icon_img");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private PostThumbnail getPostThumbnail(JSONArray thumbsArray, int index) throws JSONException {
+        PostThumbnail thumb = new PostThumbnail();
+        thumb.setWidth(thumbsArray.getJSONObject(index).getInt("width"));
+        thumb.setHeight(thumbsArray.getJSONObject(index).getInt("height"));
+        thumb.setUrl(thumbsArray.getJSONObject(index).getString("url"));
+        return thumb;
     }
 }
