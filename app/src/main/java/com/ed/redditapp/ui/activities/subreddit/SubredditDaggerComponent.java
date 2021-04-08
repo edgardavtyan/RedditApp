@@ -7,7 +7,7 @@ import dagger.Component;
 
 @ActivityScope
 @Component(dependencies = AppDaggerComponent.class,
-           modules = SubRedditDaggerModule.class)
-public interface SubRedditActivityDaggerComponent {
-    void inject(SubRedditActivity activity);
+           modules = SubredditDaggerModule.class)
+public interface SubredditDaggerComponent {
+    void inject(SubredditActivity activity);
 }

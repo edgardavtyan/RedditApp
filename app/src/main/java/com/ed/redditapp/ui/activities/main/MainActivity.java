@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
-import com.ed.redditapp.ui.activities.subreddit.SubRedditActivity;
+import com.ed.redditapp.ui.activities.subreddit.SubredditActivity;
 import com.ed.redditapp.ui.fragments.search.SearchFragment;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
 import com.ed.redditapp.ui.postlist.Post;
@@ -83,9 +83,9 @@ public class MainActivity
     }
 
     public void gotoSubreddit(String subredditName) {
-        Intent intent = new Intent(this, SubRedditActivity.class);
+        Intent intent = new Intent(this, SubredditActivity.class);
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(SubRedditActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+        intent.putExtra(SubredditActivity.EXTRA_SUBREDDIT_NAME, subredditName);
         startActivity(intent);
     }
 }

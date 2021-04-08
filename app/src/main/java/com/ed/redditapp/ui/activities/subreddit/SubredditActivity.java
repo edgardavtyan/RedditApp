@@ -20,10 +20,10 @@ import com.ed.redditapp.ui.postlist.Post;
 
 import javax.inject.Inject;
 
-public class SubRedditActivity extends AppCompatActivity {
+public class SubredditActivity extends AppCompatActivity {
     public static final String EXTRA_SUBREDDIT_NAME = "extra_subreddit_name";
 
-    @Inject SubRedditPresenter presenter;
+    @Inject SubredditPresenter presenter;
     @Inject PostListAdapter adapter;
 
     private ActivitySubredditBinding binding;
@@ -35,10 +35,10 @@ public class SubRedditActivity extends AppCompatActivity {
         binding = ActivitySubredditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        DaggerSubRedditActivityDaggerComponent
+        DaggerSubredditDaggerComponent
                 .builder()
                 .appDaggerComponent(((App) getApplication()).getAppComponent())
-                .subRedditDaggerModule(new SubRedditDaggerModule(this))
+                .subRedditDaggerModule(new SubredditDaggerModule(this))
                 .build()
                 .inject(this);
 

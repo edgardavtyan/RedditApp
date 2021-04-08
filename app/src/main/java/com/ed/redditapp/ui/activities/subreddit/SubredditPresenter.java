@@ -1,10 +1,10 @@
 package com.ed.redditapp.ui.activities.subreddit;
 
-public class SubRedditPresenter {
-    private final SubRedditActivity view;
-    private final SubRedditModel model;
+public class SubredditPresenter {
+    private final SubredditActivity view;
+    private final SubredditModel model;
 
-    public SubRedditPresenter(SubRedditActivity view, SubRedditModel model) {
+    public SubredditPresenter(SubredditActivity view, SubredditModel model) {
         this.view = view;
         this.model = model;
     }

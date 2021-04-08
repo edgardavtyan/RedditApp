@@ -8,23 +8,23 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class SubRedditDaggerModule {
-    private final SubRedditActivity activity;
+public class SubredditDaggerModule {
+    private final SubredditActivity activity;
 
-    public SubRedditDaggerModule(SubRedditActivity activity) {
+    public SubredditDaggerModule(SubredditActivity activity) {
         this.activity = activity;
     }
 
     @Provides
     @ActivityScope
-    public SubRedditModel provideModel(RedditApi redditApi) {
-        return new SubRedditModel(redditApi);
+    public SubredditModel provideModel(RedditApi redditApi) {
+        return new SubredditModel(redditApi);
     }
 
     @Provides
     @ActivityScope
-    public SubRedditPresenter providePresenter(SubRedditModel model) {
-        return new SubRedditPresenter(activity, model);
+    public SubredditPresenter providePresenter(SubredditModel model) {
+        return new SubredditPresenter(activity, model);
     }
 
     @Provides

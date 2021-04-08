@@ -17,7 +17,7 @@ import com.ed.redditapp.databinding.FragmentSearchBinding;
 import com.ed.redditapp.lib.TextChangedWatcher;
 import com.ed.redditapp.lib.api.SubReddit;
 import com.ed.redditapp.ui.activities.main.MainActivity;
-import com.ed.redditapp.ui.activities.subreddit.SubRedditActivity;
+import com.ed.redditapp.ui.activities.subreddit.SubredditActivity;
 
 import javax.inject.Inject;
 
@@ -78,9 +78,9 @@ public class SearchFragment extends Fragment {
     }
 
     public void gotoSubRedditActivity(SubReddit subreddit) {
-        Intent intent = new Intent(activity, SubRedditActivity.class);
+        Intent intent = new Intent(activity, SubredditActivity.class);
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(SubRedditActivity.EXTRA_SUBREDDIT_NAME, subreddit.getName());
+        intent.putExtra(SubredditActivity.EXTRA_SUBREDDIT_NAME, subreddit.getName());
         activity.startActivity(intent);
     }
 }

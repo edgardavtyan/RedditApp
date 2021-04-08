@@ -2,11 +2,11 @@ package com.ed.redditapp.ui.activities.subreddit;
 
 import com.ed.redditapp.lib.api.RedditApi;
 
-public class SubRedditModel {
+public class SubredditModel {
     private final SubredditInfoAsyncTask infoAsyncTask;
     private final SubredditPostsAsyncTask postsAsyncTask;
 
-    public SubRedditModel(RedditApi redditApi) {
+    public SubredditModel(RedditApi redditApi) {
         infoAsyncTask = new SubredditInfoAsyncTask(redditApi);
         postsAsyncTask = new SubredditPostsAsyncTask(redditApi);
     }
