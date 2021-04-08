@@ -54,8 +54,9 @@ public class SubRedditActivity extends AppCompatActivity {
         binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                binding.header.setY(binding.header.getY() - dy * 0.7f);
-                binding.shadow.setY(binding.shadow.getY() - dy * 0.7f);
+                int parallax = (int) (binding.list.computeVerticalScrollOffset() * 0.7);
+                binding.header.setTranslationY(-parallax);
+                binding.shadow.setTranslationY(-parallax + binding.header.getHeight());
             }
         });
     }
