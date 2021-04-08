@@ -5,7 +5,7 @@ import android.text.Html;
 import androidx.annotation.Nullable;
 
 import com.ed.redditapp.lib.http.HttpClient;
-import com.ed.redditapp.ui.postlist.PostListItem;
+import com.ed.redditapp.ui.postlist.Post;
 import com.ed.redditapp.ui.postlist.PostThumbnail;
 
 import org.json.JSONArray;
@@ -59,17 +59,17 @@ public class RedditApi {
         }
     }
 
-    public PostListItem[] getSubredditPosts(String subredditName) {
+    public Post[] getSubredditPosts(String subredditName) {
         try {
             JSONArray postsJson = httpClient
                     .getJson(String.format(USL_SUBREDDIT_ROOT, subredditName))
                     .getJSONObject("data")
                     .getJSONArray("children");
 
-            PostListItem[] posts = new PostListItem[postsJson.length()];
+            Post[] posts = new Post[postsJson.length()];
             for (int i = 0; i < postsJson.length(); i++) {
                 JSONObject postJson = postsJson.getJSONObject(i).getJSONObject("data");
-                PostListItem post = new PostListItem();
+                Post post = new Post();
                 post.setTitle(postJson.getString("title"));
                 post.setUsername(postJson.getString("author"));
                 post.setSubreddit(postJson.getString("subreddit"));

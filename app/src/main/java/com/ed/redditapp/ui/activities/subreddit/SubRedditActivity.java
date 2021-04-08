@@ -16,7 +16,7 @@ import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivitySubredditBinding;
 import com.ed.redditapp.lib.api.SubReddit;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
-import com.ed.redditapp.ui.postlist.PostListItem;
+import com.ed.redditapp.ui.postlist.Post;
 
 import javax.inject.Inject;
 
@@ -89,7 +89,7 @@ public class SubRedditActivity extends AppCompatActivity {
         });
     }
 
-    public void updatePosts(PostListItem[] posts) {
+    public void updatePosts(Post[] posts) {
         adapter.updateData(posts);
     }
 }

@@ -1,6 +1,6 @@
 package com.ed.redditapp.ui.activities.main;
 
-import com.ed.redditapp.ui.postlist.PostListItem;
+import com.ed.redditapp.ui.postlist.Post;
 
 public class MainActivityPresenter {
     private final MainActivity view;
@@ -18,7 +18,7 @@ public class MainActivityPresenter {
         });
     }
 
-    public void onPostInfoClicked(PostListItem post) {
+    public void onPostInfoClicked(Post post) {
         view.gotoSubreddit(post.getSubreddit());
     }
 }

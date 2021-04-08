@@ -2,13 +2,13 @@ package com.ed.redditapp.ui.activities.subreddit;
 
 import com.ed.redditapp.lib.AsyncTask;
 import com.ed.redditapp.lib.api.RedditApi;
-import com.ed.redditapp.ui.postlist.PostListItem;
+import com.ed.redditapp.ui.postlist.Post;
 
 public class SubredditPostsAsyncTask {
     private final RedditApi redditApi;
 
     public interface Callback {
-        void callback(PostListItem[] posts);
+        void callback(Post[] posts);
     }
 
     public SubredditPostsAsyncTask(RedditApi redditApi) {
@@ -17,7 +17,7 @@ public class SubredditPostsAsyncTask {
 
     public void run(String subredditName, Callback callback) {
         new AsyncTask().runAsync(h -> {
-            PostListItem[] posts = redditApi.getSubredditPosts(subredditName);
+            Post[] posts = redditApi.getSubredditPosts(subredditName);
             h.onUIThread(() -> callback.callback(posts));
         });
     }

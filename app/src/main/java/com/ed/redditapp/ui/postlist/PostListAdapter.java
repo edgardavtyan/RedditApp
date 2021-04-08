@@ -19,10 +19,10 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     private static final Integer PAYLOAD_ICON_CHANGED = 1;
 
     public interface ClickListener {
-        void onClick(PostListItem post);
+        void onClick(Post post);
     }
 
-    private PostListItem[] posts;
+    private Post[] posts;
 
     @Setter private ClickListener infoClickListener;
     @Setter private boolean isDisplayIcon = true;
@@ -36,7 +36,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PostListViewHolder holder, int position) {
-        PostListItem post = posts[position];
+        Post post = posts[position];
         holder.setTitle(post.getTitle());
         holder.setCommentsCount(post.getCommentsCount());
         holder.setInfo(post.getPoints(), post.getTimestamp(), post.getUsername());
@@ -76,7 +76,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
             return VIEW_TYPE_DEFAULT;
     }
 
-    public void updateData(PostListItem[] posts) {
+    public void updateData(Post[] posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }

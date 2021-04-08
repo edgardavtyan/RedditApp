@@ -14,7 +14,7 @@ import com.ed.redditapp.databinding.ActivityMainBinding;
 import com.ed.redditapp.ui.activities.subreddit.SubRedditActivity;
 import com.ed.redditapp.ui.fragments.search.SearchFragment;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
-import com.ed.redditapp.ui.postlist.PostListItem;
+import com.ed.redditapp.ui.postlist.Post;
 
 import javax.inject.Inject;
 
@@ -74,7 +74,7 @@ public class MainActivity
         return false;
     }
 
-    public void updatePosts(PostListItem[] posts) {
+    public void updatePosts(Post[] posts) {
         postListAdapter.updateData(posts);
     }
 

@@ -1,13 +1,13 @@
 package com.ed.redditapp.ui.activities.main;
 
 import com.ed.redditapp.lib.api.RedditApi;
-import com.ed.redditapp.ui.postlist.PostListItem;
+import com.ed.redditapp.ui.postlist.Post;
 
 public class MainActivityModel {
     private final MainPagePostsAsyncTask mainPagePostsAsyncTask;
     private final MainPageSubredditIconUrlAsyncTask subredditIconUrlAsyncTask;
 
-    private PostListItem[] posts;
+    private Post[] posts;
 
     public MainActivityModel(RedditApi redditApi) {
         this.mainPagePostsAsyncTask = new MainPagePostsAsyncTask(redditApi);

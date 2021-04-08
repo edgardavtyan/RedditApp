@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PostListItem {
+public class Post {
     private String title;
     private String username;
     private String subreddit;
