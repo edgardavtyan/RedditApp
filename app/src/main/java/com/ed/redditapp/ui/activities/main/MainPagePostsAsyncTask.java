@@ -17,7 +17,7 @@ public class MainPagePostsAsyncTask {
 
     public void run(Callback callback) {
         new AsyncTask().runAsync((h) -> {
-            PostListItem[] posts = redditApi.getMainPagePosts();
+            PostListItem[] posts = redditApi.getSubredditPosts("popular");
             h.onUIThread(() -> callback.callback(posts));
         });
     }

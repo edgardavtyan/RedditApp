@@ -11,5 +11,6 @@ public class SubRedditPresenter {
 
     public void onActivityCreated(String subredditName) {
         model.getSubredditInfo(subredditName, view::updateSubredditInfo);
+        model.getSubredditPosts(subredditName, view::updatePosts);
     }
 }

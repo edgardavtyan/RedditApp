@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class RedditApi {
     private static final String URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on";
     private static final String URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json";
-    private static final String URL_MAIN_PAGE = "https://www.reddit.com/r/popular.json";
+    private static final String USL_SUBREDDIT_ROOT = "https://www.reddit.com/r/%s.json";
     private final HttpClient httpClient;
 
     public RedditApi() {
@@ -56,10 +56,10 @@ public class RedditApi {
         }
     }
 
-    public PostListItem[] getMainPagePosts() {
+    public PostListItem[] getSubredditPosts(String subredditName) {
         try {
             JSONArray postsJson = httpClient
-                    .getJson(URL_MAIN_PAGE)
+                    .getJson(String.format(USL_SUBREDDIT_ROOT, subredditName))
                     .getJSONObject("data")
                     .getJSONArray("children");
 

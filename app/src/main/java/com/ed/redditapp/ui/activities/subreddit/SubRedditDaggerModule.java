@@ -2,6 +2,7 @@ package com.ed.redditapp.ui.activities.subreddit;
 
 import com.ed.redditapp.ActivityScope;
 import com.ed.redditapp.lib.api.RedditApi;
+import com.ed.redditapp.ui.postlist.PostListAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,5 +25,11 @@ public class SubRedditDaggerModule {
     @ActivityScope
     public SubRedditPresenter providePresenter(SubRedditModel model) {
         return new SubRedditPresenter(activity, model);
+    }
+
+    @Provides
+    @ActivityScope
+    public PostListAdapter provideAdapter() {
+        return new PostListAdapter();
     }
 }
