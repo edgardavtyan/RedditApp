@@ -49,11 +49,6 @@ public class SubRedditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        binding.header.post(() -> {
-            binding.list.addItemDecoration(new FirstItemOffsetDecoration(binding.header.getHeight()));
-            binding.shadow.setY(binding.header.getHeight());
-        });
-
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(adapter);
         binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -84,6 +79,11 @@ public class SubRedditActivity extends AppCompatActivity {
                 .load(subreddit.getIconUrl())
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.icon);
+
+        binding.header.post(() -> {
+            binding.list.addItemDecoration(new FirstItemOffsetDecoration(binding.header.getHeight()));
+            binding.shadow.setY(binding.header.getHeight());
+        });
     }
 
     public void updatePosts(PostListItem[] posts) {
