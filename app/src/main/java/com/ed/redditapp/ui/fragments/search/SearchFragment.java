@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment {
         DaggerSearchDaggerComponent
                 .builder()
                 .appDaggerComponent(((App) activity.getApplication()).getAppComponent())
-                .searchFragmentDaggerModule(new SearchDaggerModule(this))
+                .searchDaggerModule(new SearchDaggerModule(this))
                 .build()
                 .inject(this);
 

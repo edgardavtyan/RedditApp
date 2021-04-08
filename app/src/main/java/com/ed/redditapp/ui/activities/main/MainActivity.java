@@ -42,7 +42,7 @@ public class MainActivity
         DaggerMainDaggerComponent
                 .builder()
                 .appDaggerComponent(((App) getApplication()).getAppComponent())
-                .mainActivityDaggerModule(new MainDaggerModule(this))
+                .mainDaggerModule(new MainDaggerModule(this))
                 .build()
                 .inject(this);
 

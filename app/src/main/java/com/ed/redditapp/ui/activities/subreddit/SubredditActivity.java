@@ -38,7 +38,7 @@ public class SubredditActivity extends AppCompatActivity {
         DaggerSubredditDaggerComponent
                 .builder()
                 .appDaggerComponent(((App) getApplication()).getAppComponent())
-                .subRedditDaggerModule(new SubredditDaggerModule(this))
+                .subredditDaggerModule(new SubredditDaggerModule(this))
                 .build()
                 .inject(this);
 
