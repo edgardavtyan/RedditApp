@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ListitemPostBinding;
 
@@ -44,7 +45,10 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setSubredditIcon(String iconUrl) {
-        Glide.with(context).load(iconUrl).into(binding.subredditIcon);
+        Glide.with(context)
+                .load(iconUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.subredditIcon);
     }
 
     public void setCommentsCount(int commentsCount) {
