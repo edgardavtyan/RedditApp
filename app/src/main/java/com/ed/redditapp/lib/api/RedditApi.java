@@ -156,6 +156,8 @@ public class RedditApi {
                     Comment c = new Comment();
                     c.setUsername(commentJson.getString("author"));
                     c.setBody(commentJson.getString("body_html"));
+                    c.setTimestamp(commentJson.getLong("created_utc"));
+                    c.setPoints(commentJson.getInt("ups"));
                     comments.add(c);
                 } catch (JSONException e) {
                     continue;
@@ -177,6 +179,8 @@ public class RedditApi {
                                 reply.setUsername(js.getString("author"));
                                 reply.setBody(js.getString("body_html"));
                                 reply.setIndent(indentLevel);
+                                reply.setTimestamp(js.getLong("created_utc"));
+                                reply.setPoints(js.getInt("ups"));
                                 jsonStack.add(js);
                                 comments.add(reply);
                             } catch (JSONException ignored) {

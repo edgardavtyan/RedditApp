@@ -11,5 +11,7 @@ public class Comment {
     private ArrayList<Comment> replies;
     private String username;
     private String body;
+    private long timestamp;
+    private int points;
     private int indent;
 }
