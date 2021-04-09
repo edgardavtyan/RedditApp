@@ -1,7 +1,6 @@
 package com.ed.redditapp.ui.search;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ed.redditapp.App;
+import com.ed.redditapp.Navigator;
 import com.ed.redditapp.databinding.FragmentSearchBinding;
 import com.ed.redditapp.lib.TextChangedWatcher;
 import com.ed.redditapp.lib.api.SubReddit;
 import com.ed.redditapp.ui.main.MainActivity;
-import com.ed.redditapp.ui.subreddit.SubredditActivity;
 
 import javax.inject.Inject;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class SearchFragment extends Fragment {
     @Inject SearchPresenter presenter;
@@ -78,9 +75,6 @@ public class SearchFragment extends Fragment {
     }
 
     public void gotoSubRedditActivity(SubReddit subreddit) {
-        Intent intent = new Intent(activity, SubredditActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(SubredditActivity.EXTRA_SUBREDDIT_NAME, subreddit.getName());
-        activity.startActivity(intent);
+        Navigator.gotoSubreddit(activity, subreddit.getName());
     }
 }

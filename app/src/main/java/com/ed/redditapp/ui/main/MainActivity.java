@@ -1,6 +1,5 @@
 package com.ed.redditapp.ui.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -9,17 +8,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ed.redditapp.App;
+import com.ed.redditapp.Navigator;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
-import com.ed.redditapp.ui.post_detail.PostDetailActivity;
 import com.ed.redditapp.ui.postlist.Post;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
 import com.ed.redditapp.ui.search.SearchFragment;
-import com.ed.redditapp.ui.subreddit.SubredditActivity;
 
 import javax.inject.Inject;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class MainActivity
         extends AppCompatActivity
@@ -85,16 +81,10 @@ public class MainActivity
     }
 
     public void gotoSubreddit(String subredditName) {
-        Intent intent = new Intent(this, SubredditActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(SubredditActivity.EXTRA_SUBREDDIT_NAME, subredditName);
-        startActivity(intent);
+        Navigator.gotoSubreddit(this, subredditName);
     }
 
     public void gotoPostDetail(Post post) {
-        Intent intent = new Intent(this, PostDetailActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(PostDetailActivity.EXTRA_POST_URL, post.getPermalink());
-        startActivity(intent);
+        Navigator.gotoPostDetail(this, post);
     }
 }
