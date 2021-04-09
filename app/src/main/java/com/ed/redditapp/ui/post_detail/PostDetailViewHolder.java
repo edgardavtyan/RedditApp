@@ -28,7 +28,7 @@ public class PostDetailViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setIndent(int indent) {
-        int px = indent * 20 * context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
+        int px = indent * 3 * context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
         binding.getRoot().setTranslationX(px);
     }
 }
