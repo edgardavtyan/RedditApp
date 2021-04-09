@@ -12,6 +12,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class RedditApi {
     private static final String URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on";
     private static final String URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json";
@@ -143,15 +146,50 @@ public class RedditApi {
                     .getJSONObject("data")
                     .getJSONArray("children");
 
-            Comment[] comments = new Comment[commentsJson.length() - 1];
-            for (int i = 0; i < commentsJson.length() - 1; i++) {
+            Comment root = new Comment();
+            ArrayList<Comment> replies = new ArrayList<>();
+
+            Stack<JSONObject> jsonStack = new Stack<>();
+            Stack<Comment> commentStack = new Stack<>();
+            for (int i = 0; i < commentsJson.length(); i++) {
                 JSONObject commentJson = commentsJson.getJSONObject(i).getJSONObject("data");
+                jsonStack.add(commentJson);
+
                 Comment comment = new Comment();
                 comment.setUsername(commentJson.getString("author"));
-                comments[i] = comment;
+                commentStack.add(comment);
+
+                replies.add(comment);
             }
 
-            return comments;
+            root.setReplies(replies);
+
+            while (!jsonStack.isEmpty()) {
+                JSONObject json = jsonStack.pop();
+                Comment comment = commentStack.pop();
+                if (json.has("replies") && !json.get("replies").equals("")) {
+                    JSONArray repliesJson = json
+                            .getJSONObject("replies")
+                            .getJSONObject("data")
+                            .getJSONArray("children");
+
+                    ArrayList<Comment> replies2 = new ArrayList<>();
+                    for (int i = 0; i < repliesJson.length(); i++) {
+                        JSONObject j = repliesJson.getJSONObject(i).getJSONObject("data");
+                        jsonStack.add(j);
+
+                        Comment reply = new Comment();
+                        reply.setUsername(j.getString("author"));
+                        replies2.add(reply);
+
+                        commentStack.add(reply);
+                    }
+
+                    comment.setReplies(replies2);
+                }
+            }
+
+            return (Comment[]) root.getReplies().toArray();
         } catch (Exception e) {
             return null;
         }

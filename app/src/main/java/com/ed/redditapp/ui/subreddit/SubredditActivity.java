@@ -1,5 +1,6 @@
 package com.ed.redditapp.ui.subreddit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -15,10 +16,13 @@ import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivitySubredditBinding;
 import com.ed.redditapp.lib.api.SubReddit;
-import com.ed.redditapp.ui.postlist.PostListAdapter;
+import com.ed.redditapp.ui.post_detail.PostDetailActivity;
 import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.ui.postlist.PostListAdapter;
 
 import javax.inject.Inject;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class SubredditActivity extends AppCompatActivity {
     public static final String EXTRA_SUBREDDIT_NAME = "extra_subreddit_name";
@@ -49,6 +53,7 @@ public class SubredditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         adapter.setDisplayIcon(false);
+        adapter.setTitleClickListener(presenter::onPostTitleClicked);
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(adapter);
         binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -91,5 +96,12 @@ public class SubredditActivity extends AppCompatActivity {
 
     public void updatePosts(Post[] posts) {
         adapter.updateData(posts);
+    }
+
+    public void gotoPostDetail(Post post) {
+        Intent intent = new Intent(this, PostDetailActivity.class);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(PostDetailActivity.EXTRA_POST_URL, post.getPermalink());
+        startActivity(intent);
     }
 }
