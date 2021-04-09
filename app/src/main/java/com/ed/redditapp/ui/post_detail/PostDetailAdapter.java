@@ -23,6 +23,8 @@ public class PostDetailAdapter extends RecyclerView.Adapter<PostDetailViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostDetailViewHolder holder, int position) {
         holder.setUsername(comments[position].getUsername());
+        holder.setBody(comments[position].getBody());
+        holder.setIndent(comments[position].getIndent());
     }
 
     @Override

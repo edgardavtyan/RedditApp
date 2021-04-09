@@ -154,9 +154,14 @@ public class RedditApi {
                 Stack<JSONObject> jsonStack = new Stack<>();
                 jsonStack.add(commentJson);
 
-                Comment c = new Comment();
-                c.setUsername(commentJson.getString("author"));
-                comments.add(c);
+                try {
+                    Comment c = new Comment();
+                    c.setUsername(commentJson.getString("author"));
+                    c.setBody(Html.fromHtml(commentJson.getString("body_html")).toString());
+                    comments.add(c);
+                } catch (JSONException e) {
+                    continue;
+                }
 
                 indentLevel = 0;
                 while (!jsonStack.isEmpty()) {
@@ -168,12 +173,16 @@ public class RedditApi {
                                 .getJSONObject("data")
                                 .getJSONArray("children");
                         for (int j = 0; j < repliesJson.length(); j++) {
-                            JSONObject js = repliesJson.getJSONObject(j).getJSONObject("data");
-                            Comment reply = new Comment();
-                            reply.setUsername(js.getString("author"));
-                            reply.setIndent(indentLevel);
-                            jsonStack.add(js);
-                            comments.add(reply);
+                            try {
+                                JSONObject js = repliesJson.getJSONObject(j).getJSONObject("data");
+                                Comment reply = new Comment();
+                                reply.setUsername(js.getString("author"));
+                                reply.setBody(Html.fromHtml(js.getString("body_html")).toString());
+                                reply.setIndent(indentLevel);
+                                jsonStack.add(js);
+                                comments.add(reply);
+                            } catch (JSONException ignored) {
+                            }
                         }
                     } else {
                         indentLevel--;
