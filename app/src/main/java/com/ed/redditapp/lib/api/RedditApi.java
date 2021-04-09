@@ -1,7 +1,5 @@
 package com.ed.redditapp.lib.api;
 
-import android.text.Html;
-
 import androidx.annotation.Nullable;
 
 import com.ed.redditapp.lib.http.HttpClient;
@@ -17,9 +15,9 @@ import java.util.Stack;
 
 public class RedditApi {
     private static final String URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on";
-    private static final String URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json";
+    private static final String URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json?raw_json=1";
     private static final String USL_SUBREDDIT_ROOT = "https://www.reddit.com/r/%s.json";
-    private static final String URL_COMMENTS = "https://www.reddit.com%s.json";
+    private static final String URL_COMMENTS = "https://www.reddit.com%s.json?raw_json=1";
     private final HttpClient httpClient;
 
     public RedditApi() {
@@ -129,8 +127,8 @@ public class RedditApi {
             String url = String.format(URL_SUBREDDIT_ABOUT, subreddit);
             JSONObject json = httpClient.getJson(url).getJSONObject("data");
 
-            String iconUrl = Html.fromHtml(json.getString("icon_img")).toString();
-            String communityIcon = Html.fromHtml(json.getString("community_icon")).toString();
+            String iconUrl = json.getString("icon_img");
+            String communityIcon = json.getString("community_icon");
             return !iconUrl.isEmpty() ? iconUrl : communityIcon;
         } catch (Exception e) {
             return null;
@@ -157,7 +155,7 @@ public class RedditApi {
                 try {
                     Comment c = new Comment();
                     c.setUsername(commentJson.getString("author"));
-                    c.setBody(Html.fromHtml(commentJson.getString("body_html")).toString());
+                    c.setBody(commentJson.getString("body_html"));
                     comments.add(c);
                 } catch (JSONException e) {
                     continue;
@@ -177,7 +175,7 @@ public class RedditApi {
                                 JSONObject js = repliesJson.getJSONObject(j).getJSONObject("data");
                                 Comment reply = new Comment();
                                 reply.setUsername(js.getString("author"));
-                                reply.setBody(Html.fromHtml(js.getString("body_html")).toString());
+                                reply.setBody(js.getString("body_html"));
                                 reply.setIndent(indentLevel);
                                 jsonStack.add(js);
                                 comments.add(reply);
