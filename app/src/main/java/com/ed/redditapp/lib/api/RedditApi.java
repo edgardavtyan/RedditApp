@@ -146,50 +146,44 @@ public class RedditApi {
                     .getJSONObject("data")
                     .getJSONArray("children");
 
-            Comment root = new Comment();
-            ArrayList<Comment> replies = new ArrayList<>();
+            int indentLevel;
+            ArrayList<Comment> comments = new ArrayList<>();
 
-            Stack<JSONObject> jsonStack = new Stack<>();
-            Stack<Comment> commentStack = new Stack<>();
             for (int i = 0; i < commentsJson.length(); i++) {
                 JSONObject commentJson = commentsJson.getJSONObject(i).getJSONObject("data");
+                Stack<JSONObject> jsonStack = new Stack<>();
                 jsonStack.add(commentJson);
 
-                Comment comment = new Comment();
-                comment.setUsername(commentJson.getString("author"));
-                commentStack.add(comment);
+                Comment c = new Comment();
+                c.setUsername(commentJson.getString("author"));
+                comments.add(c);
 
-                replies.add(comment);
-            }
-
-            root.setReplies(replies);
-
-            while (!jsonStack.isEmpty()) {
-                JSONObject json = jsonStack.pop();
-                Comment comment = commentStack.pop();
-                if (json.has("replies") && !json.get("replies").equals("")) {
-                    JSONArray repliesJson = json
-                            .getJSONObject("replies")
-                            .getJSONObject("data")
-                            .getJSONArray("children");
-
-                    ArrayList<Comment> replies2 = new ArrayList<>();
-                    for (int i = 0; i < repliesJson.length(); i++) {
-                        JSONObject j = repliesJson.getJSONObject(i).getJSONObject("data");
-                        jsonStack.add(j);
-
-                        Comment reply = new Comment();
-                        reply.setUsername(j.getString("author"));
-                        replies2.add(reply);
-
-                        commentStack.add(reply);
+                indentLevel = 0;
+                while (!jsonStack.isEmpty()) {
+                    JSONObject json = jsonStack.pop();
+                    if (json.has("replies") && !json.get("replies").equals("")) {
+                        indentLevel++;
+                        JSONArray repliesJson = json
+                                .getJSONObject("replies")
+                                .getJSONObject("data")
+                                .getJSONArray("children");
+                        for (int j = 0; j < repliesJson.length(); j++) {
+                            JSONObject js = repliesJson.getJSONObject(j).getJSONObject("data");
+                            Comment reply = new Comment();
+                            reply.setUsername(js.getString("author"));
+                            reply.setIndent(indentLevel);
+                            jsonStack.add(js);
+                            comments.add(reply);
+                        }
+                    } else {
+                        indentLevel--;
                     }
-
-                    comment.setReplies(replies2);
                 }
             }
 
-            return (Comment[]) root.getReplies().toArray();
+            Comment[] commentsArray = new Comment[comments.size()];
+            comments.toArray(commentsArray);
+            return commentsArray;
         } catch (Exception e) {
             return null;
         }

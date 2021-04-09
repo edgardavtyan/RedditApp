@@ -10,4 +10,5 @@ import lombok.Setter;
 public class Comment {
     private ArrayList<Comment> replies;
     private String username;
+    private int indent;
 }
