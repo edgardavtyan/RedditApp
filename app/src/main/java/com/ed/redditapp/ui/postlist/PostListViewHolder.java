@@ -89,4 +89,8 @@ public class PostListViewHolder extends RecyclerView.ViewHolder {
     public void setInfoClickListener(View.OnClickListener listener) {
         binding.topWrapper.setOnClickListener(listener);
     }
+
+    public void setTitleClickListener(View.OnClickListener listener) {
+        binding.title.setOnClickListener(listener);
+    }
 }

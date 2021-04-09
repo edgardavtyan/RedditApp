@@ -16,6 +16,7 @@ public class RedditApi {
     private static final String URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on";
     private static final String URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json";
     private static final String USL_SUBREDDIT_ROOT = "https://www.reddit.com/r/%s.json";
+    private static final String URL_COMMENTS = "https://www.reddit.com%s.json";
     private final HttpClient httpClient;
 
     public RedditApi() {
@@ -76,6 +77,7 @@ public class RedditApi {
                 post.setCommentsCount(postJson.getInt("num_comments"));
                 post.setPoints(postJson.getInt("ups"));
                 post.setTimestamp(postJson.getLong("created_utc"));
+                post.setPermalink(postJson.getString("permalink"));
 
                 if (postJson.has("preview")) {
                     JSONArray thumbsJson = postJson
@@ -127,6 +129,29 @@ public class RedditApi {
             String iconUrl = Html.fromHtml(json.getString("icon_img")).toString();
             String communityIcon = Html.fromHtml(json.getString("community_icon")).toString();
             return !iconUrl.isEmpty() ? iconUrl : communityIcon;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Comment[] getPostComments(String postUrl) {
+        try {
+            String url = String.format(URL_COMMENTS, postUrl);
+            JSONArray commentsJson = httpClient
+                    .getArray(url)
+                    .getJSONObject(1)
+                    .getJSONObject("data")
+                    .getJSONArray("children");
+
+            Comment[] comments = new Comment[commentsJson.length() - 1];
+            for (int i = 0; i < commentsJson.length() - 1; i++) {
+                JSONObject commentJson = commentsJson.getJSONObject(i).getJSONObject("data");
+                Comment comment = new Comment();
+                comment.setUsername(commentJson.getString("author"));
+                comments[i] = comment;
+            }
+
+            return comments;
         } catch (Exception e) {
             return null;
         }

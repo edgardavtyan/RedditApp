@@ -25,6 +25,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
     private Post[] posts;
 
     @Setter private ClickListener infoClickListener;
+    @Setter private ClickListener titleClickListener;
     @Setter private boolean isDisplayIcon = true;
 
     @NonNull
@@ -45,6 +46,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
         holder.setSubredditIcon(post.getSubredditIconUrl());
         holder.setDisplayIcon(isDisplayIcon);
         holder.setInfoClickListener(v -> infoClickListener.onClick(post));
+        holder.setTitleClickListener(v -> titleClickListener.onClick(post));
     }
 
     @Override

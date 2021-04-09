@@ -3,6 +3,7 @@ package com.ed.redditapp.lib.http;
 import android.net.Uri;
 import android.util.Base64;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -69,6 +70,14 @@ public class HttpClient {
         }
 
         return null;
+    }
+
+    public JSONArray getArray(String url) {
+        try {
+            return new JSONArray(get(url));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private String getData(HttpURLConnection connection) throws IOException {

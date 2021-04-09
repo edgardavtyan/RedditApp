@@ -21,4 +21,8 @@ public class MainPresenter {
     public void onPostInfoClicked(Post post) {
         view.gotoSubreddit(post.getSubreddit());
     }
+
+    public void onPostTitleClicked(Post post) {
+        view.gotoPostDetail(post);
+    }
 }

@@ -10,6 +10,7 @@ public class Post {
     private String username;
     private String subreddit;
     private String subredditIconUrl;
+    private String permalink;
     private PostThumbnail thumbnailSmall;
     private PostThumbnail thumbnail320;
     private PostThumbnail thumbnail640;

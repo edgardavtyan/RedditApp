@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
+import com.ed.redditapp.ui.post_detail.PostDetailActivity;
 import com.ed.redditapp.ui.postlist.Post;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
 import com.ed.redditapp.ui.search.SearchFragment;
@@ -53,6 +54,7 @@ public class MainActivity
         binding.list.setAdapter(postListAdapter);
 
         postListAdapter.setInfoClickListener(presenter::onPostInfoClicked);
+        postListAdapter.setTitleClickListener(presenter::onPostTitleClicked);
 
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
@@ -86,6 +88,13 @@ public class MainActivity
         Intent intent = new Intent(this, SubredditActivity.class);
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(SubredditActivity.EXTRA_SUBREDDIT_NAME, subredditName);
+        startActivity(intent);
+    }
+
+    public void gotoPostDetail(Post post) {
+        Intent intent = new Intent(this, PostDetailActivity.class);
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(PostDetailActivity.EXTRA_POST_URL, post.getPermalink());
         startActivity(intent);
     }
 }
