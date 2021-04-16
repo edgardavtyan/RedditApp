@@ -1,5 +1,7 @@
 package com.ed.redditapp.lib.http;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Base64;
 
@@ -75,6 +77,19 @@ public class HttpClient {
     public JSONArray getArray(String url) {
         try {
             return new JSONArray(get(url));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public Bitmap getBitmap(String url) {
+        try {
+            URL urlConn = new URL(url);
+            HttpURLConnection connection = (HttpURLConnection) urlConn.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
         } catch (Exception e) {
             return null;
         }
