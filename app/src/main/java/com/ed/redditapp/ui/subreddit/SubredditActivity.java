@@ -1,6 +1,5 @@
 package com.ed.redditapp.ui.subreddit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -18,7 +17,6 @@ import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivitySubredditBinding;
 import com.ed.redditapp.lib.api.Post;
 import com.ed.redditapp.lib.api.SubReddit;
-import com.ed.redditapp.ui.post_detail.PostDetailActivity;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
 
 import javax.inject.Inject;
