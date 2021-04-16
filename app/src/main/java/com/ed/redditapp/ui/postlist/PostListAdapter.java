@@ -27,6 +27,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
 
     @Setter private ClickListener infoClickListener;
     @Setter private ClickListener titleClickListener;
+    @Setter private ClickListener thumbnailClickListener;
     @Setter private boolean isDisplayIcon = true;
 
     @NonNull
@@ -48,6 +49,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListViewHolder> {
         holder.setDisplayIcon(isDisplayIcon);
         holder.setInfoClickListener(v -> infoClickListener.onClick(post));
         holder.setTitleClickListener(v -> titleClickListener.onClick(post));
+        holder.setThumbnailClickListener(v -> thumbnailClickListener.onClick(post));
     }
 
     @Override

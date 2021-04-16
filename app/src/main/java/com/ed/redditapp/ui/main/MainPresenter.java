@@ -25,4 +25,8 @@ public class MainPresenter {
     public void onPostTitleClicked(Post post) {
         view.gotoPostDetail(post);
     }
+
+    public void onThumbnailClicked(Post post) {
+        view.gotoImageView(post);
+    }
 }

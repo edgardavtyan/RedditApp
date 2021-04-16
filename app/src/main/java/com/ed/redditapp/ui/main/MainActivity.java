@@ -51,6 +51,7 @@ public class MainActivity
 
         postListAdapter.setInfoClickListener(presenter::onPostInfoClicked);
         postListAdapter.setTitleClickListener(presenter::onPostTitleClicked);
+        postListAdapter.setThumbnailClickListener(presenter::onThumbnailClicked);
 
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
@@ -86,5 +87,9 @@ public class MainActivity
 
     public void gotoPostDetail(Post post) {
         Navigator.gotoPostDetail(this, post);
+    }
+
+    public void gotoImageView(Post post) {
+        Navigator.gotoImageView(this, post.getThumbnailSource().getUrl());
     }
 }
