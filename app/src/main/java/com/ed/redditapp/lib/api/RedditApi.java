@@ -1,7 +1,5 @@
 package com.ed.redditapp.lib.api;
 
-import com.ed.redditapp.ui.postlist.Post;
-
 public interface RedditApi {
     SubReddit[] searchSubreddits(String query);
     SubReddit getSubredditInfo(String subredditName);

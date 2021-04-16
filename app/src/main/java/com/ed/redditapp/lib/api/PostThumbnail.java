@@ -1,4 +1,4 @@
-package com.ed.redditapp.ui.postlist;
+package com.ed.redditapp.lib.api;
 
 import org.json.JSONException;
 import org.json.JSONObject;

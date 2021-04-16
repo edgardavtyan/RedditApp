@@ -11,7 +11,7 @@ import com.ed.redditapp.App;
 import com.ed.redditapp.Navigator;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivityMainBinding;
-import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.lib.api.Post;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
 import com.ed.redditapp.ui.search.SearchFragment;
 

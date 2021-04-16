@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ListitemPostBinding;
+import com.ed.redditapp.lib.api.PostThumbnail;
 
 import java.util.Calendar;
 

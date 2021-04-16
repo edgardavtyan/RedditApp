@@ -1,6 +1,6 @@
 package com.ed.redditapp.ui.main;
 
-import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.lib.api.Post;
 
 public class MainPresenter {
     private final MainActivity view;

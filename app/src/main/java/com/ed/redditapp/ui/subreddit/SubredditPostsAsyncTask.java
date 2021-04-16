@@ -1,8 +1,8 @@
 package com.ed.redditapp.ui.subreddit;
 
 import com.ed.redditapp.lib.AsyncTask;
+import com.ed.redditapp.lib.api.Post;
 import com.ed.redditapp.lib.api.RedditApi;
-import com.ed.redditapp.ui.postlist.Post;
 
 public class SubredditPostsAsyncTask {
     private final RedditApi redditApi;

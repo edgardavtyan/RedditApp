@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ed.redditapp.R;
+import com.ed.redditapp.lib.api.Post;
 
 import java.util.List;
 

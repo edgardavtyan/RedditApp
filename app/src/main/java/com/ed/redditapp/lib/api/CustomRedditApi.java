@@ -1,7 +1,6 @@
 package com.ed.redditapp.lib.api;
 
 import com.ed.redditapp.lib.http.HttpClient;
-import com.ed.redditapp.ui.postlist.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,7 +53,7 @@ public class CustomRedditApi implements RedditApi {
             JSONArray postsJsonArray = json.getJSONArray("posts");
             Post[] posts = new Post[postsJsonArray.length()];
             for (int i = 0; i < postsJsonArray.length(); i++) {
-                posts[i] = new Post(postsJsonArray.getJSONObject(i));
+                posts[i] = new CustomPost(postsJsonArray.getJSONObject(i));
             }
 
             return posts;
@@ -79,7 +78,7 @@ public class CustomRedditApi implements RedditApi {
             JSONArray commentsJson = httpClient.getArray(String.format(URL_COMMENTS, postUrl));
             Comment[] comments = new Comment[commentsJson.length()];
             for (int i = 0; i < commentsJson.length(); i++) {
-                comments[i] = new Comment(commentsJson.getJSONObject(i));
+                comments[i] = new CustomComment(commentsJson.getJSONObject(i));
             }
             return comments;
         } catch (JSONException e) {

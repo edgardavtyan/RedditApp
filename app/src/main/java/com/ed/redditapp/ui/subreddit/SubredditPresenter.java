@@ -1,6 +1,6 @@
 package com.ed.redditapp.ui.subreddit;
 
-import com.ed.redditapp.ui.postlist.Post;
+import com.ed.redditapp.lib.api.Post;
 
 public class SubredditPresenter {
     private final SubredditActivity view;

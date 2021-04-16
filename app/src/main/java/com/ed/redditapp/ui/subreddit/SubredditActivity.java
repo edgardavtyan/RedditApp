@@ -15,9 +15,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.ed.redditapp.App;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivitySubredditBinding;
+import com.ed.redditapp.lib.api.Post;
 import com.ed.redditapp.lib.api.SubReddit;
 import com.ed.redditapp.ui.post_detail.PostDetailActivity;
-import com.ed.redditapp.ui.postlist.Post;
 import com.ed.redditapp.ui.postlist.PostListAdapter;
 
 import javax.inject.Inject;

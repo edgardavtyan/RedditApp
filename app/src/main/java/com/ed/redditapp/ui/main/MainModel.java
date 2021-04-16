@@ -1,7 +1,7 @@
 package com.ed.redditapp.ui.main;
 
+import com.ed.redditapp.lib.api.Post;
 import com.ed.redditapp.lib.api.RedditApi;
-import com.ed.redditapp.ui.postlist.Post;
 
 public class MainModel {
     private final MainPostsAsyncTask mainPostsAsyncTask;

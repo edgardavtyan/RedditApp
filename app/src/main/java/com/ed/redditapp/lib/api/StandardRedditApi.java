@@ -1,13 +1,8 @@
 package com.ed.redditapp.lib.api;
 
-import androidx.annotation.Nullable;
-
 import com.ed.redditapp.lib.http.HttpClient;
-import com.ed.redditapp.ui.postlist.Post;
-import com.ed.redditapp.ui.postlist.PostThumbnail;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -69,53 +64,9 @@ public class StandardRedditApi implements RedditApi {
                     .getJson(String.format(USL_SUBREDDIT_ROOT, subredditName))
                     .getJSONObject("data")
                     .getJSONArray("children");
-
             Post[] posts = new Post[postsJson.length()];
             for (int i = 0; i < postsJson.length(); i++) {
-                JSONObject postJson = postsJson.getJSONObject(i).getJSONObject("data");
-                Post post = new Post();
-                post.setTitle(postJson.getString("title"));
-                post.setUsername(postJson.getString("author"));
-                post.setSubreddit(postJson.getString("subreddit"));
-                post.setCommentsCount(postJson.getInt("num_comments"));
-                post.setPoints(postJson.getInt("ups"));
-                post.setTimestamp(postJson.getLong("created_utc"));
-                post.setPermalink(postJson.getString("permalink"));
-
-                if (postJson.has("preview")) {
-                    JSONArray thumbsJson = postJson
-                            .getJSONObject("preview")
-                            .getJSONArray("images")
-                            .getJSONObject(0)
-                            .getJSONArray("resolutions");
-
-                    if (thumbsJson.length() < 3) {
-                        PostThumbnail thumbSmall = new PostThumbnail();
-                        JSONObject thumbSmallJson = postJson
-                                .getJSONObject("preview")
-                                .getJSONArray("images")
-                                .getJSONObject(0)
-                                .getJSONObject("source");
-                        thumbSmall.setWidth(thumbSmallJson.getInt("width"));
-                        thumbSmall.setHeight(thumbSmallJson.getInt("height"));
-                        thumbSmall.setUrl(thumbSmallJson.getString("url"));
-                        post.setThumbnailSmall(thumbSmall);
-                    }
-
-                    if (thumbsJson.length() >= 4) {
-                        post.setThumbnail320(getPostThumbnail(thumbsJson, 2));
-                    }
-
-                    if (thumbsJson.length() >= 5) {
-                        post.setThumbnail640(getPostThumbnail(thumbsJson, 3));
-                    }
-
-                    if (thumbsJson.length() >= 6) {
-                        post.setThumbnail960(getPostThumbnail(thumbsJson, 4));
-                    }
-                }
-
-                posts[i] = post;
+                posts[i] = new StandardPost(postsJson.getJSONObject(i).getJSONObject("data"));
             }
 
             return posts;
@@ -147,51 +98,31 @@ public class StandardRedditApi implements RedditApi {
                     .getJSONObject(1)
                     .getJSONObject("data")
                     .getJSONArray("children");
-
-            int indentLevel;
+            Stack<StandardJsonComment> jsonStack = new Stack<>();
             ArrayList<Comment> comments = new ArrayList<>();
-
-            for (int i = 0; i < commentsJson.length(); i++) {
-                JSONObject commentJson = commentsJson.getJSONObject(i).getJSONObject("data");
-                Stack<JSONObject> jsonStack = new Stack<>();
-                jsonStack.add(commentJson);
-
-                try {
-                    Comment c = new Comment();
-                    c.setUsername(commentJson.getString("author"));
-                    c.setBody(commentJson.getString("body_html"));
-                    c.setTimestamp(commentJson.getLong("created_utc"));
-                    c.setPoints(commentJson.getInt("ups"));
-                    comments.add(c);
-                } catch (JSONException e) {
-                    continue;
+            for (int i = commentsJson.length() - 1; i >= 0; i--) {
+                if (commentsJson.getJSONObject(i).getString("kind").equals("t1")) {
+                    JSONObject jsonComment = commentsJson.getJSONObject(i).getJSONObject("data");
+                    jsonStack.push(new StandardJsonComment(jsonComment, 0));
                 }
+            }
 
-                indentLevel = 0;
-                while (!jsonStack.isEmpty()) {
-                    JSONObject json = jsonStack.pop();
-                    if (json.has("replies") && !json.get("replies").equals("")) {
-                        indentLevel++;
-                        JSONArray repliesJson = json
-                                .getJSONObject("replies")
-                                .getJSONObject("data")
-                                .getJSONArray("children");
-                        for (int j = 0; j < repliesJson.length(); j++) {
-                            try {
-                                JSONObject js = repliesJson.getJSONObject(j).getJSONObject("data");
-                                Comment reply = new Comment();
-                                reply.setUsername(js.getString("author"));
-                                reply.setBody(js.getString("body_html"));
-                                reply.setIndent(indentLevel);
-                                reply.setTimestamp(js.getLong("created_utc"));
-                                reply.setPoints(js.getInt("ups"));
-                                jsonStack.add(js);
-                                comments.add(reply);
-                            } catch (JSONException ignored) {
-                            }
+            while (jsonStack.size() > 0) {
+                StandardJsonComment jsonComment = jsonStack.pop();
+                JSONObject data = jsonComment.getData();
+                comments.add(new StandardComment(jsonComment));
+                if (data.has("replies") && !data.get("replies").equals("")) {
+                    jsonComment.incrementIndent();
+                    JSONArray repliesJson = data
+                            .getJSONObject("replies")
+                            .getJSONObject("data")
+                            .getJSONArray("children");
+                    for (int i = repliesJson.length() - 1; i >= 0; i--) {
+                        JSONObject replyJson = repliesJson.getJSONObject(i);
+                        if (replyJson.getString("kind").equals("t1")) {
+                            jsonStack.push(new StandardJsonComment(
+                                    replyJson.getJSONObject("data"), jsonComment.getIndent()));
                         }
-                    } else {
-                        indentLevel--;
                     }
                 }
             }
@@ -202,13 +133,5 @@ public class StandardRedditApi implements RedditApi {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    private PostThumbnail getPostThumbnail(JSONArray thumbsArray, int index) throws JSONException {
-        PostThumbnail thumb = new PostThumbnail();
-        thumb.setWidth(thumbsArray.getJSONObject(index).getInt("width"));
-        thumb.setHeight(thumbsArray.getJSONObject(index).getInt("height"));
-        thumb.setUrl(thumbsArray.getJSONObject(index).getString("url"));
-        return thumb;
     }
 }
