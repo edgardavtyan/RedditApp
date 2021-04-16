@@ -102,10 +102,7 @@ public class SubredditActivity extends AppCompatActivity {
     }
 
     public void gotoPostDetail(Post post) {
-        Intent intent = new Intent(this, PostDetailActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(PostDetailActivity.EXTRA_POST_URL, post.getPermalink());
-        startActivity(intent);
+        Navigator.gotoPostDetail(this, post);
     }
 
     public void gotoImageView(String url) {
