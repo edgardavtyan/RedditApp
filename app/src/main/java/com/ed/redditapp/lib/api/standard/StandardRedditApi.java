@@ -1,5 +1,10 @@
-package com.ed.redditapp.lib.api;
+package com.ed.redditapp.lib.api.standard;
 
+import com.ed.redditapp.lib.api.Comment;
+import com.ed.redditapp.lib.api.Post;
+import com.ed.redditapp.lib.api.RedditApi;
+import com.ed.redditapp.lib.api.SearchItemSubreddit;
+import com.ed.redditapp.lib.api.SubReddit;
 import com.ed.redditapp.lib.http.HttpClient;
 
 import org.json.JSONArray;
@@ -20,17 +25,14 @@ public class StandardRedditApi implements RedditApi {
     }
 
     @Override
-    public SubReddit[] searchSubreddits(String query) {
+    public SearchItemSubreddit[] searchSubreddits(String query) {
         try {
             String url = String.format(URL_SEARCH_SUBREDDIT, query);
             JSONArray entries = httpClient.getJson(url).getJSONObject("data").getJSONArray("children");
-            SubReddit[] results = new SubReddit[entries.length()];
+            SearchItemSubreddit[] results = new SearchItemSubreddit[entries.length()];
             for (int i = 0; i < entries.length(); i++) {
-                SubReddit subReddit = new SubReddit();
                 JSONObject data = entries.getJSONObject(i).getJSONObject("data");
-                subReddit.setName(data.getString("display_name"));
-                subReddit.setSubsCount(data.getInt("subscribers"));
-                results[i] = subReddit;
+                results[i] = new StandardSearchItemSubreddit(data);
             }
             return results;
         } catch (Exception e) {
@@ -42,16 +44,7 @@ public class StandardRedditApi implements RedditApi {
     public SubReddit getSubredditInfo(String subredditName) {
         try {
             String url = String.format(URL_SUBREDDIT_ABOUT, subredditName);
-            JSONObject json = httpClient.getJson(url).getJSONObject("data");
-
-            SubReddit subreddit = new SubReddit();
-            subreddit.setName(json.getString("display_name"));
-            subreddit.setSubsCount(json.getInt("subscribers"));
-            subreddit.setTitle(json.getString("title"));
-            subreddit.setDescription(json.getString("public_description"));
-            subreddit.setIconUrl(getSubredditIconUrl(subredditName));
-
-            return subreddit;
+            return new StandardSubreddit(httpClient.getJson(url).getJSONObject("data"));
         } catch (Exception e) {
             return null;
         }

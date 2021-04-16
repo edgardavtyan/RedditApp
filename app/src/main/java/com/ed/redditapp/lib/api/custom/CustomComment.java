@@ -1,4 +1,6 @@
-package com.ed.redditapp.lib.api;
+package com.ed.redditapp.lib.api.custom;
+
+import com.ed.redditapp.lib.api.Comment;
 
 import org.json.JSONException;
 import org.json.JSONObject;

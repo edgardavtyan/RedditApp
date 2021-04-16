@@ -1,4 +1,7 @@
-package com.ed.redditapp.lib.api;
+package com.ed.redditapp.lib.api.custom;
+
+import com.ed.redditapp.lib.api.Post;
+import com.ed.redditapp.lib.api.PostThumbnail;
 
 import org.json.JSONException;
 import org.json.JSONObject;

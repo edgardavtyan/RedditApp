@@ -1,4 +1,4 @@
-package com.ed.redditapp.lib.api;
+package com.ed.redditapp.lib.api.standard;
 
 import org.json.JSONObject;
 

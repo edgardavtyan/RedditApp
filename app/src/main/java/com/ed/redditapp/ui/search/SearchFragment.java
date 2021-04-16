@@ -15,7 +15,7 @@ import com.ed.redditapp.App;
 import com.ed.redditapp.Navigator;
 import com.ed.redditapp.databinding.FragmentSearchBinding;
 import com.ed.redditapp.lib.TextChangedWatcher;
-import com.ed.redditapp.lib.api.SubReddit;
+import com.ed.redditapp.lib.api.SearchItemSubreddit;
 import com.ed.redditapp.ui.main.MainActivity;
 
 import javax.inject.Inject;
@@ -59,7 +59,7 @@ public class SearchFragment extends Fragment {
         return binding.getRoot();
     }
 
-    public void updateSearchResults(SubReddit[] data) {
+    public void updateSearchResults(SearchItemSubreddit[] data) {
         adapter.updateData(data);
     }
 
@@ -74,7 +74,7 @@ public class SearchFragment extends Fragment {
         inputMethodManager.showSoftInput(binding.searchText, InputMethodManager.SHOW_IMPLICIT);
     }
 
-    public void gotoSubRedditActivity(SubReddit subreddit) {
+    public void gotoSubRedditActivity(SearchItemSubreddit subreddit) {
         Navigator.gotoSubreddit(activity, subreddit.getName());
     }
 }

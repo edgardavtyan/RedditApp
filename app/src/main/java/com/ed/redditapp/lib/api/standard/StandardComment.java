@@ -1,10 +1,10 @@
-package com.ed.redditapp.lib.api;
+package com.ed.redditapp.lib.api.standard;
+
+import com.ed.redditapp.lib.api.Comment;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class StandardComment implements Comment {

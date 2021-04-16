@@ -1,7 +1,7 @@
 package com.ed.redditapp.ui.search;
 
 import com.ed.redditapp.lib.api.RedditApi;
-import com.ed.redditapp.lib.api.SubReddit;
+import com.ed.redditapp.lib.api.SearchItemSubreddit;
 
 import lombok.Getter;
 
@@ -9,7 +9,7 @@ public class SearchModel {
     private final SearchAsyncTask searchAsyncTask;
 
     @Getter
-    private SubReddit[] subreddits;
+    private SearchItemSubreddit[] subreddits;
 
     public SearchModel(RedditApi redditApi) {
         this.searchAsyncTask = new SearchAsyncTask(redditApi);

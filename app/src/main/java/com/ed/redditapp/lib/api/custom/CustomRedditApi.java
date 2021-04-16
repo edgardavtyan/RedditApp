@@ -1,5 +1,10 @@
-package com.ed.redditapp.lib.api;
+package com.ed.redditapp.lib.api.custom;
 
+import com.ed.redditapp.lib.api.Comment;
+import com.ed.redditapp.lib.api.Post;
+import com.ed.redditapp.lib.api.RedditApi;
+import com.ed.redditapp.lib.api.SearchItemSubreddit;
+import com.ed.redditapp.lib.api.SubReddit;
 import com.ed.redditapp.lib.http.HttpClient;
 
 import org.json.JSONArray;
@@ -20,15 +25,12 @@ public class CustomRedditApi implements RedditApi {
     }
 
     @Override
-    public SubReddit[] searchSubreddits(String query) {
+    public SearchItemSubreddit[] searchSubreddits(String query) {
         try {
             JSONArray searchJson = httpClient.getArray(String.format(URL_SEARCH, query));
-            SubReddit[] subreddits = new SubReddit[searchJson.length()];
+            SearchItemSubreddit[] subreddits = new SearchItemSubreddit[searchJson.length()];
             for (int i = 0; i < searchJson.length(); i++) {
-                SubReddit subreddit = new SubReddit();
-                subreddit.setName(searchJson.getJSONObject(i).getString("name"));
-                subreddit.setSubsCount(searchJson.getJSONObject(i).getInt("subs"));
-                subreddits[i] = subreddit;
+                subreddits[i] = new CustomSearchItemSubreddit(searchJson.getJSONObject(i));
             }
             return subreddits;
         } catch (JSONException e) {
@@ -39,8 +41,8 @@ public class CustomRedditApi implements RedditApi {
     @Override
     public SubReddit getSubredditInfo(String subredditName) {
         try {
-            JSONObject aboutJson = httpClient.getJson(String.format(URL_SUBREDDIT_ABOUT, subredditName));
-            return new SubReddit(aboutJson);
+            String url = String.format(URL_SUBREDDIT_ABOUT, subredditName);
+            return new CustomSubreddit(httpClient.getJson(url));
         } catch (JSONException e) {
             return null;
         }
