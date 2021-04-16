@@ -10,6 +10,6 @@ public class RedditApiDaggerModule {
     @Provides
     @Singleton
     public RedditApi provideRedditApi() {
-        return new RedditApi();
+        return new CustomRedditApi();
     }
 }
