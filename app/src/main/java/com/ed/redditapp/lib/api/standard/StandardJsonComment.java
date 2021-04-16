@@ -3,7 +3,6 @@ package com.ed.redditapp.lib.api.standard;
 import org.json.JSONObject;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public class StandardJsonComment {

@@ -13,9 +13,6 @@ public class PostThumbnail {
     private int width;
     private int height;
 
-    public PostThumbnail() {
-    }
-
     public PostThumbnail(JSONObject previewsJson) throws JSONException {
         url = previewsJson.getString("url");
         width = previewsJson.getInt("width");
