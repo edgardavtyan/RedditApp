@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.ed.redditapp.App;
+import com.ed.redditapp.Navigator;
 import com.ed.redditapp.R;
 import com.ed.redditapp.databinding.ActivitySubredditBinding;
 import com.ed.redditapp.lib.api.Post;
@@ -54,6 +55,8 @@ public class SubredditActivity extends AppCompatActivity {
 
         adapter.setDisplayIcon(false);
         adapter.setTitleClickListener(presenter::onPostTitleClicked);
+        adapter.setThumbnailClickListener(presenter::onThumbnailClicked);
+
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(adapter);
         binding.list.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -103,5 +106,9 @@ public class SubredditActivity extends AppCompatActivity {
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(PostDetailActivity.EXTRA_POST_URL, post.getPermalink());
         startActivity(intent);
+    }
+
+    public void gotoImageView(String url) {
+        Navigator.gotoImageView(this, url);
     }
 }

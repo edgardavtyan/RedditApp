@@ -19,4 +19,8 @@ public class SubredditPresenter {
     public void onPostTitleClicked(Post post) {
         view.gotoPostDetail(post);
     }
+
+    public void onThumbnailClicked(Post post) {
+        view.gotoImageView(post.getThumbnailSource().getUrl());
+    }
 }
