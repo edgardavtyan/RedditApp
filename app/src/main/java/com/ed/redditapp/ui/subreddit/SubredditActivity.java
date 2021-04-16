@@ -21,8 +21,6 @@ import com.ed.redditapp.ui.postlist.PostListAdapter;
 
 import javax.inject.Inject;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
 public class SubredditActivity extends AppCompatActivity {
     public static final String EXTRA_SUBREDDIT_NAME = "extra_subreddit_name";
 
