@@ -17,8 +17,8 @@ public class CustomComment implements Comment {
 
     public CustomComment(JSONObject json) throws JSONException {
         username = json.getString("author");
-        body = json.getString("body");
-        timestamp = json.getLong("crated_utc");
+        body = json.getString("body_html");
+        timestamp = json.getLong("created_utc");
         points = json.getInt("ups");
         indent = json.getInt("indent");
     }
