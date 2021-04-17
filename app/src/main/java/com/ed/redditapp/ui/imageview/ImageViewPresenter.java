@@ -10,6 +10,6 @@ public class ImageViewPresenter {
     }
 
     public void onLoaded(String url) {
-        model.downloadImage(url, view::setImage);
+        view.setImage(url);
     }
 }

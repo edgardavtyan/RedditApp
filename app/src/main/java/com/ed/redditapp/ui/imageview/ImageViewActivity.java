@@ -1,6 +1,6 @@
 package com.ed.redditapp.ui.imageview;
 
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -33,7 +33,7 @@ public class ImageViewActivity extends AppCompatActivity {
         presenter.onLoaded(getIntent().getStringExtra(EXTRA_IMAGE_URL));
     }
 
-    public void setImage(Bitmap image) {
-        binding.imageview.setImageBitmap(image);
+    public void setImage(String url) {
+        binding.imageview.showImage(Uri.parse(url));
     }
 }
