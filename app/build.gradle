@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
@@ -37,14 +38,16 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-    implementation 'com.google.dagger:dagger:2.33'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.33'
+    implementation 'com.google.dagger:dagger:2.34'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.34'
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'org.sufficientlysecure:html-textview:4.0'
-
     implementation 'com.github.piasy:BigImageViewer:1.8.0'
     implementation 'com.github.piasy:GlideImageLoader:1.8.0'
+
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

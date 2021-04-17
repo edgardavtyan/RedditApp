@@ -1,6 +1,6 @@
 package com.ed.redditapp.lib.api;
 
-import com.ed.redditapp.lib.api.custom.CustomRedditApi;
+import com.ed.redditapp.lib.api.kotlin.KotlinRedditApi;
 
 import javax.inject.Singleton;
 
@@ -12,6 +12,6 @@ public class RedditApiDaggerModule {
     @Provides
     @Singleton
     public RedditApi provideRedditApi() {
-        return new CustomRedditApi();
+        return new KotlinRedditApi();
     }
 }

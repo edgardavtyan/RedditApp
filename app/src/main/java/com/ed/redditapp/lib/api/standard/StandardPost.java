@@ -8,10 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-public class StandardPost implements Post {
+public class StandardPost extends Post {
     private final String title;
     private final String username;
     private final String subreddit;
@@ -23,9 +22,6 @@ public class StandardPost implements Post {
     private PostThumbnail thumbnail320;
     private PostThumbnail thumbnail640;
     private PostThumbnail thumbnail960;
-
-    @Setter
-    private String subredditIconUrl;
 
     public StandardPost(JSONObject json) throws JSONException {
         title = json.getString("title");
