@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ed.redditapp.R
 import com.ed.redditapp.lib.api.Post
 
+typealias PostListClickListener = (post: Post) -> Unit
 class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
     private val VIEW_TYPE_FIRST = 1
     private val VIEW_TYPE_DEFAULT = 0
@@ -13,9 +14,9 @@ class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
 
     private var posts: Array<Post> = emptyArray()
 
-    var infoClickListener: ((post: Post) -> Void)? = null
-    var titleClickListener: ((post: Post) -> Void)? = null
-    var thumbnailClickListener: ((post: Post) -> Unit)? = null
+    var infoClickListener: PostListClickListener? = null
+    var titleClickListener: PostListClickListener? = null
+    var thumbnailClickListener: PostListClickListener? = null
     var isDisplayIcon: Boolean = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostListViewHolder {
