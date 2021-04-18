@@ -13,8 +13,8 @@ class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
 
     private var posts: Array<Post> = emptyArray()
 
-    var infoClickListener: ((post: Post) -> Unit)? = null
-    var titleClickListener: ((post: Post) -> Unit)? = null
+    var infoClickListener: ((post: Post) -> Void)? = null
+    var titleClickListener: ((post: Post) -> Void)? = null
     var thumbnailClickListener: ((post: Post) -> Unit)? = null
     var isDisplayIcon: Boolean = true
 
