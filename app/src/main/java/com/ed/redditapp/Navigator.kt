@@ -7,7 +7,7 @@ import com.ed.redditapp.ui.imageview.ImageViewActivity
 import com.ed.redditapp.ui.post_detail.PostDetailActivity
 import com.ed.redditapp.ui.subreddit.SubredditActivity
 
-object Navigator {
+class Navigator {
     fun gotoSubreddit(activity: Activity, subredditName: String?) {
         val intent = Intent(activity, SubredditActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

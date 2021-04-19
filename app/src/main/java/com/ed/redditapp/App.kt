@@ -10,6 +10,7 @@ class App : Application() {
             if (field == null) {
                 field = DaggerAppDaggerComponent
                         .builder()
+                        .appDaggerModule(AppDaggerModule())
                         .build()
             }
             return field

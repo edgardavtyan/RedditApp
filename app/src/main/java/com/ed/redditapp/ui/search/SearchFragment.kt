@@ -17,6 +17,7 @@ import com.ed.redditapp.ui.main.MainActivity
 import javax.inject.Inject
 
 class SearchFragment: Fragment() {
+    @Inject lateinit var navigator: Navigator
     @Inject lateinit var presenter: SearchPresenter
     @Inject lateinit var adapter: SearchAdapter
 
@@ -70,6 +71,6 @@ class SearchFragment: Fragment() {
     }
 
     fun gotoSubRedditActivity(subreddit: SearchItemSubreddit) {
-        Navigator.gotoSubreddit(activity, subreddit.name)
+        navigator.gotoSubreddit(activity, subreddit.name)
     }
 }

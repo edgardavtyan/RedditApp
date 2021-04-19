@@ -19,6 +19,7 @@ class MainActivity:
         Toolbar.OnMenuItemClickListener {
     private lateinit var searchFragment: SearchFragment
 
+    @Inject lateinit var navigator: Navigator
     @Inject lateinit var adapter: PostListAdapter
     @Inject lateinit var presenter: MainPresenter
 
@@ -73,14 +74,14 @@ class MainActivity:
     }
 
     fun gotoSubreddit(subreddit: String) {
-        Navigator.gotoSubreddit(this, subreddit)
+        navigator.gotoSubreddit(this, subreddit)
     }
 
     fun gotoPostDetail(post: Post) {
-        Navigator.gotoPostDetail(this, post)
+        navigator.gotoPostDetail(this, post)
     }
 
     fun gotoImageView(post: Post) {
-        Navigator.gotoImageView(this, post.thumbnailSource?.url)
+        navigator.gotoImageView(this, post.thumbnailSource?.url)
     }
 }

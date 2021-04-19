@@ -2,7 +2,6 @@ package com.ed.redditapp.ui.subreddit
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -24,6 +23,7 @@ class SubredditActivity: BaseActivity<ActivitySubredditBinding>() {
 
     override val binding = ActivitySubredditBinding.inflate(layoutInflater)
 
+    @Inject lateinit var navigator: Navigator
     @Inject lateinit var presenter: SubredditPresenter
     @Inject lateinit var adapter: PostListAdapter
 
@@ -88,10 +88,10 @@ class SubredditActivity: BaseActivity<ActivitySubredditBinding>() {
     }
 
     fun gotoPostDetail(post: Post) {
-        Navigator.gotoPostDetail(this, post)
+        navigator.gotoPostDetail(this, post)
     }
 
     fun gotoImageView(url: String?) {
-        Navigator.gotoImageView(this, url)
+        navigator.gotoImageView(this, url)
     }
 }

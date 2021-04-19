@@ -6,7 +6,8 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [RedditApiDaggerModule::class])
+@Component(modules = [AppDaggerModule::class, RedditApiDaggerModule::class])
 interface AppDaggerComponent {
     fun redditApi(): RedditApi
+    fun navigator(): Navigator
 }
