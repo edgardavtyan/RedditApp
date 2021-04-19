@@ -1,22 +1,25 @@
 package com.ed.redditapp.ui.post_detail
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ed.redditapp.App
+import com.ed.redditapp.BaseActivity
 import com.ed.redditapp.databinding.ActivityPostDetailBinding
 import com.ed.redditapp.lib.api.Comment
 import javax.inject.Inject
 
-class PostDetailActivity : AppCompatActivity() {
+class PostDetailActivity: BaseActivity<ActivityPostDetailBinding>() {
+    companion object {
+        const val EXTRA_POST_URL = "extra_post_url"
+    }
+
     @Inject lateinit var adapter: PostDetailAdapter
     @Inject lateinit var presenter: PostDetailPresenter
 
+    override val binding = ActivityPostDetailBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding = ActivityPostDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         DaggerPostDetailDaggerComponent
                 .builder()
@@ -33,9 +36,5 @@ class PostDetailActivity : AppCompatActivity() {
 
     fun updateComments(comments: Array<Comment>) {
         adapter.updateComments(comments)
-    }
-
-    companion object {
-        const val EXTRA_POST_URL = "extra_post_url"
     }
 }

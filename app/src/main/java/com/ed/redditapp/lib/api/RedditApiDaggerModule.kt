@@ -8,5 +8,5 @@ import javax.inject.Singleton
 @Module
 class RedditApiDaggerModule {
     @Provides @Singleton
-    fun provideRedditApi() = KotlinRedditApi()
+    fun provideRedditApi(): RedditApi = KotlinRedditApi()
 }

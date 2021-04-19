@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ed.redditapp.App
+import com.ed.redditapp.BaseActivity
 import com.ed.redditapp.Navigator
 import com.ed.redditapp.R
 import com.ed.redditapp.databinding.ActivitySubredditBinding
@@ -16,21 +17,18 @@ import com.ed.redditapp.lib.api.SubReddit
 import com.ed.redditapp.ui.postlist.PostListAdapter
 import javax.inject.Inject
 
-class SubredditActivity : AppCompatActivity() {
+class SubredditActivity: BaseActivity<ActivitySubredditBinding>() {
     companion object {
         val EXTRA_SUBREDDIT_NAME = "extra_subreddit_name"
     }
 
+    override val binding = ActivitySubredditBinding.inflate(layoutInflater)
+
     @Inject lateinit var presenter: SubredditPresenter
     @Inject lateinit var adapter: PostListAdapter
 
-    private lateinit var binding: ActivitySubredditBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivitySubredditBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         DaggerSubredditDaggerComponent
                 .builder()

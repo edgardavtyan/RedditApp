@@ -16,7 +16,7 @@ import com.ed.redditapp.lib.api.SearchItemSubreddit
 import com.ed.redditapp.ui.main.MainActivity
 import javax.inject.Inject
 
-class SearchFragment : Fragment() {
+class SearchFragment: Fragment() {
     @Inject lateinit var presenter: SearchPresenter
     @Inject lateinit var adapter: SearchAdapter
 
@@ -25,7 +25,12 @@ class SearchFragment : Fragment() {
     private lateinit var inputManager: InputMethodManager
 
     private val onBtnCloseClickListener = presenter::onBtnCloseClick
-    private val searchTextWatcher = TextChangedWatcher (presenter::onSearchTextChanged)
+
+    private val searchTextWatcher = object : TextChangedWatcher {
+        override fun textChanged(text: String) {
+            presenter.onSearchTextChanged(text)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
