@@ -6,6 +6,7 @@ import com.ed.redditapp.lib.api.Post
 import com.ed.redditapp.ui.imageview.ImageViewActivity
 import com.ed.redditapp.ui.post_detail.PostDetailActivity
 import com.ed.redditapp.ui.subreddit.SubredditActivity
+import com.ed.redditapp.ui.videoplayer.VideoPlayerActivity
 
 class Navigator {
     fun gotoSubreddit(activity: Activity, subredditName: String?) {
@@ -26,6 +27,13 @@ class Navigator {
         val intent = Intent(activity, ImageViewActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.putExtra(ImageViewActivity.EXTRA_IMAGE_URL, url)
+        activity.startActivity(intent)
+    }
+
+    fun gotoVideoView(activity: Activity, url: String?) {
+        val intent = Intent(activity, VideoPlayerActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra(VideoPlayerActivity.EXTRA_VIDEO_URL, url)
         activity.startActivity(intent)
     }
 }

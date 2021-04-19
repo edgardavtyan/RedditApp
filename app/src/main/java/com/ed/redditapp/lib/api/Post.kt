@@ -1,6 +1,13 @@
 package com.ed.redditapp.lib.api
 
+enum class MediaType {
+    IMAGE,
+    VREDDIT,
+    NONE,
+}
+
 abstract class Post {
+
     abstract val title: String
     abstract val username: String
     abstract val subreddit: String
@@ -12,6 +19,9 @@ abstract class Post {
     abstract val timestamp: Long
     abstract val commentsCount: Int
     abstract val points: Int
+
+    abstract val mediaType: MediaType
+    abstract val mediaUrl: String?
 
     var subredditIconUrl: String? = null
 

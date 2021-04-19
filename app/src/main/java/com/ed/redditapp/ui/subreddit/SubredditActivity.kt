@@ -94,4 +94,8 @@ class SubredditActivity: BaseActivity<ActivitySubredditBinding>() {
     fun gotoImageView(url: String?) {
         navigator.gotoImageView(this, url)
     }
+
+    fun gotoVideoView(url: String?) {
+        navigator.gotoVideoView(this, url)
+    }
 }

@@ -1,5 +1,6 @@
 package com.ed.redditapp.ui.subreddit
 
+import com.ed.redditapp.lib.api.MediaType
 import com.ed.redditapp.lib.api.Post
 
 class SubredditPresenter(
@@ -16,6 +17,12 @@ class SubredditPresenter(
     }
 
     fun onThumbnailClicked(post: Post) {
-        view.gotoImageView(post.thumbnailSource!!.url)
+        if (post.mediaType == MediaType.IMAGE) {
+            view.gotoImageView(post.thumbnailSource!!.url)
+        }
+
+        if (post.mediaType == MediaType.VREDDIT) {
+            view.gotoVideoView(post.mediaUrl)
+        }
     }
 }

@@ -51,6 +51,7 @@ dependencies {
     implementation 'org.sufficientlysecure:html-textview:4.0'
     implementation 'com.github.piasy:BigImageViewer:1.8.0'
     implementation 'com.github.piasy:GlideImageLoader:1.8.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.13.3'
 
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

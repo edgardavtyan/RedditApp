@@ -6,7 +6,7 @@ import com.ed.redditapp.lib.http.HttpClient
 class KotlinRedditApi : RedditApi {
     private val URL_ROOT = "http://192.168.1.100:3000"
 
-    private var httpClient: HttpClient = HttpClient()
+    private val httpClient: HttpClient = HttpClient()
 
     override fun searchSubreddits(query: String): Array<SearchItemSubreddit> {
         val json = httpClient.getArray("$URL_ROOT/search/$query")

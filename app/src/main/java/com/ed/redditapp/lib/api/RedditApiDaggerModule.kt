@@ -1,6 +1,6 @@
 package com.ed.redditapp.lib.api
 
-import com.ed.redditapp.lib.api.kotlin.KotlinRedditApi
+import com.ed.redditapp.lib.api.standard.StandardRedditApi
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -8,5 +8,5 @@ import javax.inject.Singleton
 @Module
 class RedditApiDaggerModule {
     @Provides @Singleton
-    fun provideRedditApi(): RedditApi = KotlinRedditApi()
+    fun provideRedditApi(): RedditApi = StandardRedditApi()
 }
