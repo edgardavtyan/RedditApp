@@ -45,19 +45,18 @@ class StandardPost(json: JSONObject) : Post() {
         }
 
         if (json.has("preview")) {
+            thumbnailSource = PostThumbnail(json
+                    .getJSONObject("preview")
+                    .getJSONArray("images")
+                    .getJSONObject(0)
+                    .getJSONObject("source"))
+
             val thumbsJson = json
                     .getJSONObject("preview")
                     .getJSONArray("images")
                     .getJSONObject(0)
                     .getJSONArray("resolutions")
-            if (thumbsJson.length() < 3) {
-                val thumbSourceJson = json
-                        .getJSONObject("preview")
-                        .getJSONArray("images")
-                        .getJSONObject(0)
-                        .getJSONObject("source")
-                thumbnailSource = PostThumbnail(thumbSourceJson)
-            }
+
             if (thumbsJson.length() >= 3) {
                 thumbnail320 = PostThumbnail(thumbsJson.getJSONObject(2))
             }
