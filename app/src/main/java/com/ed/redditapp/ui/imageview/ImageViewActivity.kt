@@ -7,7 +7,9 @@ import com.ed.redditapp.databinding.ActivityImageviewBinding
 import javax.inject.Inject
 
 class ImageViewActivity : AppCompatActivity() {
-    private val EXTRA_IMAGE_URL = "extra_image_url"
+    companion object {
+        val EXTRA_IMAGE_URL = "extra_image_url"
+    }
 
     private lateinit var binding: ActivityImageviewBinding
 

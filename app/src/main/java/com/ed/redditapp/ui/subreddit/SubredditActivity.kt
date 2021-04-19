@@ -17,7 +17,9 @@ import com.ed.redditapp.ui.postlist.PostListAdapter
 import javax.inject.Inject
 
 class SubredditActivity : AppCompatActivity() {
-    private val EXTRA_SUBREDDIT_NAME = "extra_subreddit_name"
+    companion object {
+        val EXTRA_SUBREDDIT_NAME = "extra_subreddit_name"
+    }
 
     @Inject lateinit var presenter: SubredditPresenter
     @Inject lateinit var adapter: PostListAdapter
@@ -37,8 +39,6 @@ class SubredditActivity : AppCompatActivity() {
                 .build()
                 .inject(this)
 
-        val subredditTitle = intent.getStringExtra(EXTRA_SUBREDDIT_NAME)
-
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -56,7 +56,8 @@ class SubredditActivity : AppCompatActivity() {
                 binding.shadow.translationY = (-parallax + binding.header.height).toFloat()
             }
         })
-        presenter.onActivityCreated(subredditTitle)
+
+        presenter.onActivityCreated(intent.getStringExtra(EXTRA_SUBREDDIT_NAME)!!)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
