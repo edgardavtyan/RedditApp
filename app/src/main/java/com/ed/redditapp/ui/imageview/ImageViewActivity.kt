@@ -11,7 +11,7 @@ class ImageViewActivity: BaseActivity<ActivityImageviewBinding>() {
         val EXTRA_IMAGE_URL = "extra_image_url"
     }
 
-    override val binding = ActivityImageviewBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityImageviewBinding.inflate(layoutInflater)
 
     @Inject lateinit var presenter: ImageViewPresenter
 

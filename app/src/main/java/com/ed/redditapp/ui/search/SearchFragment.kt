@@ -25,7 +25,7 @@ class SearchFragment: Fragment() {
     private lateinit var activity: MainActivity
     private lateinit var inputManager: InputMethodManager
 
-    private val onBtnCloseClickListener = presenter::onBtnCloseClick
+    private lateinit var onBtnCloseClickListener: (View) -> Unit
 
     private val searchTextWatcher = object : TextChangedWatcher {
         override fun textChanged(text: String) {
@@ -44,6 +44,8 @@ class SearchFragment: Fragment() {
                 .searchDaggerModule(SearchDaggerModule(this))
                 .build()
                 .inject(this)
+
+        onBtnCloseClickListener = presenter::onBtnCloseClick
 
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.list.layoutManager = LinearLayoutManager(activity)

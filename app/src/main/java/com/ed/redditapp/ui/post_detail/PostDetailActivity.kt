@@ -16,7 +16,7 @@ class PostDetailActivity: BaseActivity<ActivityPostDetailBinding>() {
     @Inject lateinit var adapter: PostDetailAdapter
     @Inject lateinit var presenter: PostDetailPresenter
 
-    override val binding = ActivityPostDetailBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityPostDetailBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

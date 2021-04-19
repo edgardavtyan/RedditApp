@@ -23,7 +23,7 @@ class MainActivity:
     @Inject lateinit var adapter: PostListAdapter
     @Inject lateinit var presenter: MainPresenter
 
-    override val binding = ActivityMainBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

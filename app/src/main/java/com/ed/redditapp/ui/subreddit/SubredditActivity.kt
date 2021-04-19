@@ -21,7 +21,7 @@ class SubredditActivity: BaseActivity<ActivitySubredditBinding>() {
         val EXTRA_SUBREDDIT_NAME = "extra_subreddit_name"
     }
 
-    override val binding = ActivitySubredditBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivitySubredditBinding.inflate(layoutInflater)
 
     @Inject lateinit var navigator: Navigator
     @Inject lateinit var presenter: SubredditPresenter
