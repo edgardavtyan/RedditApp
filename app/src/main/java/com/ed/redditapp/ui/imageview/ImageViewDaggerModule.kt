@@ -6,11 +6,9 @@ import dagger.Provides
 
 @Module
 class ImageViewDaggerModule(private val activity: ImageViewActivity) {
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun model() = ImageViewModel()
 
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun presenter(model: ImageViewModel) = ImageViewPresenter(activity, model)
 }

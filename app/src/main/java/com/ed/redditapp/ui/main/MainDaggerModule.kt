@@ -8,15 +8,12 @@ import dagger.Provides
 
 @Module
 class MainDaggerModule(val acitivty: MainActivity) {
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun adapter() = PostListAdapter()
 
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun presenter(model: MainModel) = MainPresenter(acitivty, model)
 
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun model(redditApi: RedditApi) = MainModel(redditApi)
 }

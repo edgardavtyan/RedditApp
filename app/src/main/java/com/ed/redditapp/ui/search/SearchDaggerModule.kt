@@ -7,21 +7,14 @@ import dagger.Provides
 
 @Module
 class SearchDaggerModule(private val fragment: SearchFragment) {
-    @Provides
-    @FragmentScope
-    fun provideModel(redditApi: RedditApi): SearchModel {
-        return SearchModel(redditApi)
-    }
+    @Provides @FragmentScope
+    fun provideModel(redditApi: RedditApi) = SearchModel(redditApi)
 
-    @Provides
-    @FragmentScope
-    fun providePresenter(model: SearchModel): SearchPresenter {
-        return SearchPresenter(model, fragment)
-    }
+    @Provides @FragmentScope
+    fun providePresenter(model: SearchModel) =
+        SearchPresenter(model, fragment)
 
-    @Provides
-    @FragmentScope
-    fun provideAdapter(presenter: SearchPresenter): SearchAdapter {
-        return SearchAdapter(fragment.requireContext(), presenter)
-    }
+    @Provides @FragmentScope
+    fun provideAdapter(presenter: SearchPresenter) =
+        SearchAdapter(fragment.requireContext(), presenter)
 }

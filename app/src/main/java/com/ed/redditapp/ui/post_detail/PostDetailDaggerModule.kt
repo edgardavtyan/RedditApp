@@ -7,21 +7,13 @@ import dagger.Provides
 
 @Module
 class PostDetailDaggerModule(private val activity: PostDetailActivity) {
-    @Provides
-    @ActivityScope
-    fun provideAdapter(): PostDetailAdapter {
-        return PostDetailAdapter()
-    }
+    @Provides @ActivityScope
+    fun provideAdapter() = PostDetailAdapter()
 
-    @Provides
-    @ActivityScope
-    fun provideModel(redditApi: RedditApi): PostDetailModel {
-        return PostDetailModel(redditApi)
-    }
+    @Provides @ActivityScope
+    fun provideModel(redditApi: RedditApi) = PostDetailModel(redditApi)
 
-    @Provides
-    @ActivityScope
-    fun providePresenter(model: PostDetailModel): PostDetailPresenter {
-        return PostDetailPresenter(activity, model)
-    }
+    @Provides @ActivityScope
+    fun providePresenter(model: PostDetailModel) =
+        PostDetailPresenter(activity, model)
 }

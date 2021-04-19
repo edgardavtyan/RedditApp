@@ -8,15 +8,12 @@ import dagger.Provides
 
 @Module
 class SubredditDaggerModule(private val activity: SubredditActivity) {
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun model(redditApi: RedditApi) = SubredditModel(redditApi)
 
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun presenter(model: SubredditModel) = SubredditPresenter(activity, model)
 
-    @Provides
-    @ActivityScope
+    @Provides @ActivityScope
     fun adapter() = PostListAdapter()
 }
