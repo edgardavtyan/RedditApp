@@ -21,7 +21,8 @@ class SubredditPresenter(
             view.gotoImageView(post.thumbnailSource!!.url)
         }
 
-        if (post.mediaType == MediaType.VREDDIT) {
+        if (post.mediaType == MediaType.VIDEO
+            || post.mediaType == MediaType.VIDEO_SUPPORTED) {
             view.gotoVideoView(post.mediaUrl)
         }
     }

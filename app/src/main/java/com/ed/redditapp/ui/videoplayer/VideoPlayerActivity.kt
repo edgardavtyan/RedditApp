@@ -33,7 +33,9 @@ class VideoPlayerActivity: BaseActivity<ActivityVideoplayerBinding>() {
     }
 
     fun showVideo(videoUrl: String?) {
-        exoplayer.setMediaItem(MediaItem.fromUri(videoUrl!!))
+        if (videoUrl == null) return
+
+        exoplayer.setMediaItem(MediaItem.fromUri(videoUrl))
         exoplayer.prepare()
         exoplayer.play()
     }

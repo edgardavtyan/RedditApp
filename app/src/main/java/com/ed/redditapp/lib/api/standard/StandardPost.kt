@@ -10,6 +10,7 @@ class StandardPost(json: JSONObject) : Post() {
     override val username = json.getString("author")
     override val subreddit = json.getString("subreddit")
     override val permalink = json.getString("permalink")
+    override val domain = json.getString("domain")
     override val timestamp = json.getLong("created_utc")
     override val commentsCount = json.getInt("num_comments")
     override val points = json.getInt("ups")
@@ -23,25 +24,21 @@ class StandardPost(json: JSONObject) : Post() {
     override var thumbnail960: PostThumbnail? = null
 
     init {
-        if (json.has("media") && !json.getString("media").equals("null")) {
-            if (json.getJSONObject("media").has("reddit_video")) {
-                mediaType = MediaType.VREDDIT
-            } else {
-                mediaType = MediaType.NONE
+        when {
+            domain.equals("v.redd.it") -> {
+                mediaType = MediaType.VIDEO
+                if (json.getString("media").equals("null")) {
+                    mediaUrl = null
+                } else {
+                    mediaUrl = json.getJSONObject("media")
+                            .getJSONObject("reddit_video")
+                            .getString("fallback_url")
+                }
             }
-        } else if (json.has("preview")) {
-            mediaType = MediaType.IMAGE
-        } else {
-            mediaType = MediaType.NONE
-        }
-
-        if (mediaType == MediaType.VREDDIT) {
-            mediaUrl = json
-                    .getJSONObject("media")
-                    .getJSONObject("reddit_video")
-                    .getString("fallback_url")
-        } else {
-            mediaUrl = null
+            else -> {
+                mediaType = MediaType.NONE
+                mediaUrl = null
+            }
         }
 
         if (json.has("preview")) {

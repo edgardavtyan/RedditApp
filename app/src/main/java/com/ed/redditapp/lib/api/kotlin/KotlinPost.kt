@@ -10,6 +10,7 @@ class KotlinPost(json: JSONObject) : Post() {
     override val username: String = json.getString("author")
     override val subreddit: String = json.getString("subreddit")
     override val permalink: String = json.getString("permalink")
+    override val domain: String = TODO("Not yet implemented")
     override val timestamp: Long = json.getLong("created_utc")
     override val commentsCount: Int = json.getInt("num_comments")
     override val points: Int = json.getInt("ups")
