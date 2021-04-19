@@ -8,7 +8,7 @@ typealias MainSubredditIconUrlCallback = (iconUrl: String, position: Int) -> Uni
 
 class MainSubredditIconUrlAsyncTask(private val redditApi: RedditApi) {
     fun run(posts: Array<Post>, callback: MainSubredditIconUrlCallback) {
-        for (i in IntRange(0, posts.size)) {
+        for (i in IntRange(0, posts.size - 1)) {
             AsyncTask().runAsync { h ->
                 val iconUrl = redditApi.getSubredditIconUrl(posts[i].subreddit)
                 h.onUIThread { callback(iconUrl, i) }

@@ -52,6 +52,8 @@ class MainActivity:
                 .replace(R.id.fragment_search, searchFragment)
                 .commit()
         supportFragmentManager.executePendingTransactions()
+
+        presenter.onActivityLoaded()
     }
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
