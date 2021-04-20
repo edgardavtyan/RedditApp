@@ -24,7 +24,6 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
     override var thumbnail960: PostThumbnail? = null
 
     init {
-
         val postHint = if (json.has("post_hint")) json.getString("post_hint") else null
 
         when {

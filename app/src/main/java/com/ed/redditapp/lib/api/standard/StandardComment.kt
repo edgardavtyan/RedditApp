@@ -8,5 +8,4 @@ class StandardComment(jsonComment: StandardJsonComment) : Comment {
     override val timestamp = jsonComment.data.getLong("created_utc")
     override val points = jsonComment.data.getInt("ups")
     override val indent = jsonComment.indent
-
 }
