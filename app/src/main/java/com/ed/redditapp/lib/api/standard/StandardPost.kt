@@ -31,27 +31,34 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
 
         val postHint = if (json.has("post_hint")) json.getString("post_hint") else null
 
-        if (json.has("selftext_html")) {
-            content = json.getString("selftext_html")
-            contentType = PostContentType.TEXT
-        } else if (postHint == "image") {
-            content = json.getString("url")
-            contentType = PostContentType.IMAGE
-        } else if (postHint == "link") {
-            content = json.getString("url")
-            contentType = PostContentType.LINK
-        } else if (postHint == "hosted:video") {
-            content = json
-                    .getJSONObject("media")
-                    .getJSONObject("reddit_video")
-                    .getString("fallback_url")
-            contentType = PostContentType.VIDEO_HOSTED
-        } else if (postHint == "rich:video") {
-            content = json.getString("url")
-            contentType = PostContentType.VIDEO_RICH
-        } else {
-            content = json.getString("url")
-            contentType = PostContentType.OTHER
+        when {
+            json.has("selftext_html") -> {
+                content = json.getString("selftext_html")
+                contentType = PostContentType.TEXT
+            }
+            postHint == "image" -> {
+                content = json.getString("url")
+                contentType = PostContentType.IMAGE
+            }
+            postHint == "link" -> {
+                content = json.getString("url")
+                contentType = PostContentType.LINK
+            }
+            postHint == "hosted:video" -> {
+                content = json
+                        .getJSONObject("media")
+                        .getJSONObject("reddit_video")
+                        .getString("fallback_url")
+                contentType = PostContentType.VIDEO_HOSTED
+            }
+            postHint == "rich:video" -> {
+                content = json.getString("url")
+                contentType = PostContentType.VIDEO_RICH
+            }
+            else -> {
+                content = json.getString("url")
+                contentType = PostContentType.OTHER
+            }
         }
 
         when {
