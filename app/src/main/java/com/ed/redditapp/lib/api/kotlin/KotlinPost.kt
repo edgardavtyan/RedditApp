@@ -1,6 +1,5 @@
 package com.ed.redditapp.lib.api.kotlin
 
-import com.ed.redditapp.lib.api.MediaType
 import com.ed.redditapp.lib.api.Post
 import com.ed.redditapp.lib.api.PostContentType
 import com.ed.redditapp.lib.api.PostThumbnail
@@ -20,11 +19,6 @@ class KotlinPost(json: JSONObject) : Post() {
     override var thumbnail320: PostThumbnail? = null
     override var thumbnail640: PostThumbnail? = null
     override var thumbnail960: PostThumbnail? = null
-
-    override val mediaType: MediaType
-        get() = TODO("Not yet implemented")
-    override val mediaUrl: String?
-        get() = TODO("Not yet implemented")
 
     override val contentType: PostContentType?
         get() = TODO("Not yet implemented")

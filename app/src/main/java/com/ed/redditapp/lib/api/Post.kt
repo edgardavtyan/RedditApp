@@ -1,12 +1,5 @@
 package com.ed.redditapp.lib.api
 
-enum class MediaType {
-    IMAGE,
-    VIDEO,
-    NONE,
-    VIDEO_SUPPORTED,
-}
-
 abstract class Post {
     abstract val after: String
     abstract val title: String
@@ -21,10 +14,6 @@ abstract class Post {
     abstract val timestamp: Long
     abstract val commentsCount: Int
     abstract val points: Int
-
-    abstract val mediaType: MediaType
-
-    abstract val mediaUrl: String?
 
     abstract val contentType: PostContentType?
     abstract val content: String?

@@ -1,7 +1,7 @@
 package com.ed.redditapp.ui.subreddit
 
-import com.ed.redditapp.lib.api.MediaType
 import com.ed.redditapp.lib.api.Post
+import com.ed.redditapp.lib.api.PostContentType
 
 class SubredditPresenter(
         private val view: SubredditActivity,
@@ -17,13 +17,12 @@ class SubredditPresenter(
     }
 
     fun onThumbnailClicked(post: Post) {
-        if (post.mediaType == MediaType.IMAGE) {
+        if (post.contentType == PostContentType.IMAGE) {
             view.gotoImageView(post.thumbnailSource!!.url)
         }
 
-        if (post.mediaType == MediaType.VIDEO
-            || post.mediaType == MediaType.VIDEO_SUPPORTED) {
-            view.gotoVideoView(post.mediaUrl)
+        if (post.contentType == PostContentType.VIDEO_HOSTED) {
+            view.gotoVideoView(post.content)
         }
     }
 }

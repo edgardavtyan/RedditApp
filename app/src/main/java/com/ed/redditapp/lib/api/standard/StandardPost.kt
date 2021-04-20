@@ -1,6 +1,5 @@
 package com.ed.redditapp.lib.api.standard
 
-import com.ed.redditapp.lib.api.MediaType
 import com.ed.redditapp.lib.api.Post
 import com.ed.redditapp.lib.api.PostContentType
 import com.ed.redditapp.lib.api.PostThumbnail
@@ -18,9 +17,6 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
 
     override val content: String
     override val contentType: PostContentType
-
-    override val mediaType: MediaType
-    override val mediaUrl: String?
 
     override var thumbnailSource: PostThumbnail? = null
     override var thumbnail320: PostThumbnail? = null
@@ -58,23 +54,6 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
             else -> {
                 content = json.getString("url")
                 contentType = PostContentType.OTHER
-            }
-        }
-
-        when {
-            domain.equals("v.redd.it") -> {
-                mediaType = MediaType.VIDEO
-                if (json.getString("media").equals("null")) {
-                    mediaUrl = null
-                } else {
-                    mediaUrl = json.getJSONObject("media")
-                            .getJSONObject("reddit_video")
-                            .getString("fallback_url")
-                }
-            }
-            else -> {
-                mediaType = MediaType.NONE
-                mediaUrl = null
             }
         }
 
