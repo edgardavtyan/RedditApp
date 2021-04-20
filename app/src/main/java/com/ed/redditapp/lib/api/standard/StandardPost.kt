@@ -12,13 +12,12 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
     override val subreddit = json.getString("subreddit")
     override val permalink = json.getString("permalink")
     override val domain = json.getString("domain")
-    override val postHint: String
     override val timestamp = json.getLong("created_utc")
     override val commentsCount = json.getInt("num_comments")
     override val points = json.getInt("ups")
 
-    override val content: String?
-    override val contentType: PostContentType?
+    override val content: String
+    override val contentType: PostContentType
 
     override val mediaType: MediaType
     override val mediaUrl: String?
@@ -29,18 +28,30 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
     override var thumbnail960: PostThumbnail? = null
 
     init {
-        if (json.has("post_hint")) {
-            postHint = json.getString("post_hint")
-        } else {
-            postHint = "Text"
-        }
+
+        val postHint = if (json.has("post_hint")) json.getString("post_hint") else null
 
         if (json.has("selftext_html")) {
             content = json.getString("selftext_html")
             contentType = PostContentType.TEXT
+        } else if (postHint == "image") {
+            content = json.getString("url")
+            contentType = PostContentType.IMAGE
+        } else if (postHint == "link") {
+            content = json.getString("url")
+            contentType = PostContentType.LINK
+        } else if (postHint == "hosted:video") {
+            content = json
+                    .getJSONObject("media")
+                    .getJSONObject("reddit_video")
+                    .getString("fallback_url")
+            contentType = PostContentType.VIDEO_HOSTED
+        } else if (postHint == "rich:video") {
+            content = json.getString("url")
+            contentType = PostContentType.VIDEO_RICH
         } else {
-            content = null
-            contentType = null
+            content = json.getString("url")
+            contentType = PostContentType.OTHER
         }
 
         when {

@@ -70,17 +70,6 @@ class UnitTest {
     }
 
     @Test
-    fun testPostHint_exists() {
-        assertThat(post.postHint, equalTo("PostHint"))
-    }
-
-    @Test
-    fun testPostHint_notExists_returnText() {
-        val j = JSONObject(res.get("redditapi-r-subreddit-post-hint-not-exists.json"))
-        assertThat(StandardPost(j, "after").postHint, equalTo("Text"))
-    }
-
-    @Test
     fun testPreviews_source() {
         val j = JSONObject(res.get("redditapi-post-previews-6.json"))
         val p = StandardPost(j, "after")
@@ -124,5 +113,45 @@ class UnitTest {
         val p = StandardPost(j, "after")
         assertThat(p.content, equalTo("Self Text"))
         assertThat(p.contentType, equalTo(PostContentType.TEXT))
+    }
+
+    @Test
+    fun testContent_image() {
+        val j = JSONObject(res.get("redditapi-post-image.json"))
+        val p = StandardPost(j, "after")
+        assertThat(p.content, equalTo("image-url"))
+        assertThat(p.contentType, equalTo(PostContentType.IMAGE))
+    }
+
+    @Test
+    fun testContent_link() {
+        val j = JSONObject(res.get("redditapi-post-link.json"))
+        val p = StandardPost(j, "after")
+        assertThat(p.content, equalTo("link-url"))
+        assertThat(p.contentType, equalTo(PostContentType.LINK))
+    }
+
+    @Test
+    fun testContent_hostedVideo() {
+        val j = JSONObject(res.get("redditapi-post-video-hosted.json"))
+        val p = StandardPost(j, "after")
+        assertThat(p.content, equalTo("fallback-url"))
+        assertThat(p.contentType, equalTo(PostContentType.VIDEO_HOSTED))
+    }
+
+    @Test
+    fun testContent_richVideo() {
+        val j = JSONObject(res.get("redditapi-post-video-rich.json"))
+        val p = StandardPost(j, "after")
+        assertThat(p.content, equalTo("link-url"))
+        assertThat(p.contentType, equalTo(PostContentType.VIDEO_RICH))
+    }
+
+    @Test
+    fun testContent_other() {
+        val j = JSONObject(res.get("redditapi-post-other.json"))
+        val p = StandardPost(j, "after")
+        assertThat(p.content, equalTo("link-url"))
+        assertThat(p.contentType, equalTo(PostContentType.OTHER))
     }
 }

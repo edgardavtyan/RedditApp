@@ -14,7 +14,6 @@ abstract class Post {
     abstract val subreddit: String
     abstract val permalink: String
     abstract val domain: String?
-    abstract val postHint: String
     abstract val thumbnailSource: PostThumbnail?
     abstract val thumbnail320: PostThumbnail?
     abstract val thumbnail640: PostThumbnail?
