@@ -2,6 +2,7 @@ package com.ed.redditapp.lib.api.standard
 
 import com.ed.redditapp.lib.api.MediaType
 import com.ed.redditapp.lib.api.Post
+import com.ed.redditapp.lib.api.PostContentType
 import com.ed.redditapp.lib.api.PostThumbnail
 import org.json.JSONObject
 
@@ -11,9 +12,13 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
     override val subreddit = json.getString("subreddit")
     override val permalink = json.getString("permalink")
     override val domain = json.getString("domain")
+    override val postHint: String
     override val timestamp = json.getLong("created_utc")
     override val commentsCount = json.getInt("num_comments")
     override val points = json.getInt("ups")
+
+    override val content: String?
+    override val contentType: PostContentType?
 
     override val mediaType: MediaType
     override val mediaUrl: String?
@@ -24,6 +29,20 @@ class StandardPost(json: JSONObject, override val after: String) : Post() {
     override var thumbnail960: PostThumbnail? = null
 
     init {
+        if (json.has("post_hint")) {
+            postHint = json.getString("post_hint")
+        } else {
+            postHint = "Text"
+        }
+
+        if (json.has("selftext_html")) {
+            content = json.getString("selftext_html")
+            contentType = PostContentType.TEXT
+        } else {
+            content = null
+            contentType = null
+        }
+
         when {
             domain.equals("v.redd.it") -> {
                 mediaType = MediaType.VIDEO

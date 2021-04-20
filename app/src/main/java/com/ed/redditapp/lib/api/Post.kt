@@ -14,6 +14,7 @@ abstract class Post {
     abstract val subreddit: String
     abstract val permalink: String
     abstract val domain: String?
+    abstract val postHint: String
     abstract val thumbnailSource: PostThumbnail?
     abstract val thumbnail320: PostThumbnail?
     abstract val thumbnail640: PostThumbnail?
@@ -25,6 +26,9 @@ abstract class Post {
     abstract val mediaType: MediaType
 
     abstract val mediaUrl: String?
+
+    abstract val contentType: PostContentType?
+    abstract val content: String?
 
     var subredditIconUrl: String? = null
     val largestThumbnail: PostThumbnail?

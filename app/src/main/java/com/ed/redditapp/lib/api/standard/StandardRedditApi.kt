@@ -4,15 +4,13 @@ import com.ed.redditapp.lib.api.*
 import com.ed.redditapp.lib.http.HttpClient
 import java.util.*
 
-class StandardRedditApi : RedditApi {
+class StandardRedditApi(private val httpClient: HttpClient) : RedditApi {
     companion object {
         private const val URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on"
         private const val URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json?raw_json=1"
         private const val USL_SUBREDDIT_ROOT = "https://www.reddit.com/r/%s.json?raw_json=1&after=%s"
         private const val URL_COMMENTS = "https://www.reddit.com%s.json?raw_json=1"
     }
-
-    private val httpClient = HttpClient()
 
     override fun searchSubreddits(query: String): Array<SearchItemSubreddit> {
         val url = String.format(URL_SEARCH_SUBREDDIT, query)

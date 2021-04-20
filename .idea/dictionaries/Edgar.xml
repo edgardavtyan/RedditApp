@@ -3,9 +3,11 @@
     <words>
       <w>imgur</w>
       <w>reddit</w>
+      <w>redditapi</w>
       <w>reddits</w>
       <w>subreddit</w>
       <w>subreddits</w>
+      <w>testurl</w>
     </words>
   </dictionary>
 </component>

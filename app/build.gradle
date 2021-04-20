@@ -12,6 +12,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -29,6 +30,9 @@ android {
     }
     kapt {
         generateStubs = true
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -55,4 +59,9 @@ dependencies {
 
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testImplementation 'org.json:json:20180813'
 }

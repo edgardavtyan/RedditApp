@@ -1,0 +1,61 @@
+{
+  "subreddit": "SubredditName",
+  "author_fullname": "t2_kv0bomw",
+  "title": "PostTitle",
+  "subreddit_name_prefixed": "r/SubredditName",
+  "ups": 25838,
+  "post_hint": "PostHint",
+  "domain": "i.redd.it",
+  "preview": {
+    "images": [
+      {
+        "source": {
+          "url": "preview-url-source",
+          "width": 748,
+          "height": 701
+        },
+        "resolutions": [
+          {
+            "url": "preview-url-108",
+            "width": 108,
+            "height": 101
+          },
+          {
+            "url": "preview-url-216",
+            "width": 216,
+            "height": 202
+          },
+          {
+            "url": "preview-url-320",
+            "width": 320,
+            "height": 299
+          },
+          {
+            "url": "preview-url-640",
+            "width": 640,
+            "height": 599
+          },
+          {
+            "url": "preview-url-960",
+            "width": 960,
+            "height": 800
+          },
+          {
+            "url": "preview-url-1080",
+            "width": 1080,
+            "height": 900
+          }
+        ],
+        "variants": {},
+        "id": "amx39kAn4r_3bNWkJgvHrDbbjuJhRa1UxOh_50Kpjd8"
+      }
+    ],
+    "enabled": true
+  },
+  "author": "Username",
+  "num_comments": 679,
+  "permalink": "/r/permalink",
+  "url": "https://i.redd.it/content.jpg",
+  "subreddit_subscribers": 2127490,
+  "created_utc": 1618877142
+}
