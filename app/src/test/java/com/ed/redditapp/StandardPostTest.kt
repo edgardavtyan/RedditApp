@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class UnitTest {
+class StandardPostTest {
     @Test
     fun testAfter() {
         val p = getPost("content-other")
