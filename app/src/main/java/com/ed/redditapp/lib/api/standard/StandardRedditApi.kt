@@ -8,7 +8,7 @@ class StandardRedditApi : RedditApi {
     companion object {
         private const val URL_SEARCH_SUBREDDIT = "https://www.reddit.com/subreddits/search.json?q=%s&include_over_18=on"
         private const val URL_SUBREDDIT_ABOUT = "https://www.reddit.com/r/%s/about.json?raw_json=1"
-        private const val USL_SUBREDDIT_ROOT = "https://www.reddit.com/r/%s.json?raw_json=1"
+        private const val USL_SUBREDDIT_ROOT = "https://www.reddit.com/r/%s.json?raw_json=1&after=%s"
         private const val URL_COMMENTS = "https://www.reddit.com%s.json?raw_json=1"
     }
 
@@ -29,13 +29,22 @@ class StandardRedditApi : RedditApi {
     }
 
     override fun getSubredditPosts(subredditName: String): Array<Post> {
-        val postsJson = httpClient
-                .getJson(USL_SUBREDDIT_ROOT.format(subredditName))
-                .getJSONObject("data")
-                .getJSONArray("children")
+        return getSubredditPosts(subredditName, null)
+    }
+
+    override fun getSubredditPosts(subredditName: String, after: String?): Array<Post> {
+        var url = "https://www.reddit.com/r/$subredditName.json" +
+                "?raw_json=1"
+
+        if (after != null) {
+            url += "&after=$after"
+        }
+
+        val jsonData = httpClient.getJson(url).getJSONObject("data")
+        val postsJson = jsonData.getJSONArray("children")
         return Array(postsJson.length()) {
             val data = postsJson.getJSONObject(it).getJSONObject("data")
-            StandardPost(data)
+            StandardPost(data, jsonData.getString("after"))
         }
     }
 

@@ -9,8 +9,15 @@ class MainModel(redditApi: RedditApi) {
     private val subredditIconUrlAsyncTask = MainSubredditIconUrlAsyncTask(redditApi)
 
     fun getMainPagePosts(callback: MainPostsCallback) {
-        mainPostsAsyncTask.run { posts ->
+        mainPostsAsyncTask.run(null) { posts ->
             this.posts = posts
+            callback(posts)
+        }
+    }
+
+    fun getNextPosts(after: String, callback: MainPostsCallback) {
+        mainPostsAsyncTask.run(after) { posts ->
+            this.posts += posts
             callback(posts)
         }
     }

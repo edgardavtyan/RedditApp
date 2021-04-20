@@ -5,7 +5,7 @@ import com.ed.redditapp.lib.api.Post
 import com.ed.redditapp.lib.api.PostThumbnail
 import org.json.JSONObject
 
-class StandardPost(json: JSONObject) : Post() {
+class StandardPost(json: JSONObject, override val after: String) : Post() {
     override val title = json.getString("title")
     override val username = json.getString("author")
     override val subreddit = json.getString("subreddit")

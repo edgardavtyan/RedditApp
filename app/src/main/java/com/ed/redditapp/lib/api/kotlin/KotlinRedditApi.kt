@@ -27,6 +27,10 @@ class KotlinRedditApi : RedditApi {
         return Array(json.length()) {KotlinPost(json.getJSONObject(it))}
     }
 
+    override fun getSubredditPosts(subredditName: String, after: String?): Array<Post> {
+        TODO("Not yet implemented")
+    }
+
     override fun getSubredditIconUrl(subreddit: String): String {
         return getSubredditInfo(subreddit).iconUrl
     }

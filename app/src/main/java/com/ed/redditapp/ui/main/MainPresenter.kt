@@ -21,4 +21,10 @@ class MainPresenter(val view: MainActivity, val model: MainModel) {
     fun onThumbnailClicked(post: Post) {
         view.gotoImageView(post)
     }
+
+    fun onNearEndReached(post: Post) {
+        model.getNextPosts(post.after) { posts ->
+            view.addNextPosts(posts)
+        }
+    }
 }

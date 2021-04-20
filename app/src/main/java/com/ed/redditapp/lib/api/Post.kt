@@ -8,6 +8,7 @@ enum class MediaType {
 }
 
 abstract class Post {
+    abstract val after: String
     abstract val title: String
     abstract val username: String
     abstract val subreddit: String

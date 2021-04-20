@@ -7,6 +7,8 @@ import com.ed.redditapp.R
 import com.ed.redditapp.lib.api.Post
 
 typealias PostListClickListener = (post: Post) -> Unit
+typealias PostListNearEndListener = (post: Post) -> Unit
+
 class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
     private val VIEW_TYPE_FIRST = 1
     private val VIEW_TYPE_DEFAULT = 0
@@ -17,6 +19,8 @@ class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
     var infoClickListener: PostListClickListener? = null
     var titleClickListener: PostListClickListener? = null
     var thumbnailClickListener: PostListClickListener? = null
+    var nearEndListener: PostListNearEndListener? = null
+
     var isDisplayIcon: Boolean = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostListViewHolder {
@@ -38,6 +42,10 @@ class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
         holder.setInfoClickListener { infoClickListener?.invoke(post) }
         holder.setTitleClickListener { titleClickListener?.invoke(post) }
         holder.setThumbnailClickListener { thumbnailClickListener?.invoke(post) }
+
+        if (position == posts.size - 8) {
+            nearEndListener?.invoke(post)
+        }
     }
 
     override fun onBindViewHolder(
@@ -67,5 +75,11 @@ class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
     fun updateIcon(iconUrl: String, position: Int) {
         posts[position].subredditIconUrl = iconUrl
         notifyItemChanged(position, PAYLOAD_ICON_CHANGED)
+    }
+
+    fun addPosts(newPosts: Array<Post>) {
+        val positionBefore = posts.size - 1
+        posts += newPosts
+        notifyItemRangeInserted(positionBefore, newPosts.size)
     }
 }

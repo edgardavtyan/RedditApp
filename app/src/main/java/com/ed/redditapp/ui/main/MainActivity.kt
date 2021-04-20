@@ -44,6 +44,7 @@ class MainActivity:
         adapter.infoClickListener = presenter::onPostInfoClicked
         adapter.titleClickListener = presenter::onPostTitleClicked
         adapter.thumbnailClickListener = presenter::onThumbnailClicked
+        adapter.nearEndListener = presenter::onNearEndReached
 
         searchFragment = SearchFragment()
 
@@ -69,6 +70,10 @@ class MainActivity:
 
     fun updatePosts(posts: Array<Post>) {
         adapter.updateData(posts)
+    }
+
+    fun addNextPosts(posts: Array<Post>) {
+        adapter.addPosts(posts)
     }
 
     fun updateSubredditIcons(iconUrl: String, position: Int) {

@@ -6,6 +6,7 @@ import com.ed.redditapp.lib.api.PostThumbnail
 import org.json.JSONObject
 
 class KotlinPost(json: JSONObject) : Post() {
+    override val after = json.getString("after")
     override val title: String = json.getString("title")
     override val username: String = json.getString("author")
     override val subreddit: String = json.getString("subreddit")
