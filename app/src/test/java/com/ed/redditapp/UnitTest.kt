@@ -20,7 +20,7 @@ class UnitTest {
 
     @Before
     fun beforeEach() {
-        json = JSONObject(res.get("redditapi-post-previews-6.json"))
+        json = JSONObject(res.get("redditapi-post/previews-6.json"))
         post = StandardPost(json, "after")
     }
 
@@ -71,7 +71,7 @@ class UnitTest {
 
     @Test
     fun testPreviews_source() {
-        val j = JSONObject(res.get("redditapi-post-previews-6.json"))
+        val j = JSONObject(res.get("redditapi-post/previews-6.json"))
         val p = StandardPost(j, "after")
         assertThat(p.thumbnailSource?.width, equalTo(748))
         assertThat(p.thumbnailSource?.height, equalTo(701))
@@ -80,7 +80,7 @@ class UnitTest {
 
     @Test
     fun testPreviews_3Previews() {
-        val j = JSONObject(res.get("redditapi-post-previews-3.json"))
+        val j = JSONObject(res.get("redditapi-post/previews-3.json"))
         val p = StandardPost(j, "after")
         assertThat(p.thumbnail320?.width, equalTo(320))
         assertThat(p.thumbnail320?.height, equalTo(299))
@@ -90,7 +90,7 @@ class UnitTest {
 
     @Test
     fun testPreviews_4Previews() {
-        val j = JSONObject(res.get("redditapi-post-previews-4.json"))
+        val j = JSONObject(res.get("redditapi-post/previews-4.json"))
         val p = StandardPost(j, "after")
         assertThat(p.thumbnail640?.width, equalTo(640))
         assertThat(p.thumbnail640?.height, equalTo(599))
@@ -100,7 +100,7 @@ class UnitTest {
 
     @Test
     fun testPreviews_5Previews() {
-        val j = JSONObject(res.get("redditapi-post-previews-5.json"))
+        val j = JSONObject(res.get("redditapi-post/previews-5.json"))
         val p = StandardPost(j, "after")
         assertThat(p.thumbnail960?.width, equalTo(960))
         assertThat(p.thumbnail960?.height, equalTo(800))
@@ -109,7 +109,7 @@ class UnitTest {
 
     @Test
     fun testContent_selfText() {
-        val j = JSONObject(res.get("redditapi-post-selftext.json"))
+        val j = JSONObject(res.get("redditapi-post/content-selftext.json"))
         val p = StandardPost(j, "after")
         assertThat(p.content, equalTo("Self Text"))
         assertThat(p.contentType, equalTo(PostContentType.TEXT))
@@ -117,7 +117,7 @@ class UnitTest {
 
     @Test
     fun testContent_image() {
-        val j = JSONObject(res.get("redditapi-post-image.json"))
+        val j = JSONObject(res.get("redditapi-post/content-image.json"))
         val p = StandardPost(j, "after")
         assertThat(p.content, equalTo("image-url"))
         assertThat(p.contentType, equalTo(PostContentType.IMAGE))
@@ -125,7 +125,7 @@ class UnitTest {
 
     @Test
     fun testContent_link() {
-        val j = JSONObject(res.get("redditapi-post-link.json"))
+        val j = JSONObject(res.get("redditapi-post/content-link.json"))
         val p = StandardPost(j, "after")
         assertThat(p.content, equalTo("link-url"))
         assertThat(p.contentType, equalTo(PostContentType.LINK))
@@ -133,7 +133,7 @@ class UnitTest {
 
     @Test
     fun testContent_hostedVideo() {
-        val j = JSONObject(res.get("redditapi-post-video-hosted.json"))
+        val j = JSONObject(res.get("redditapi-post/content-video-hosted.json"))
         val p = StandardPost(j, "after")
         assertThat(p.content, equalTo("fallback-url"))
         assertThat(p.contentType, equalTo(PostContentType.VIDEO_HOSTED))
@@ -141,7 +141,7 @@ class UnitTest {
 
     @Test
     fun testContent_richVideo() {
-        val j = JSONObject(res.get("redditapi-post-video-rich.json"))
+        val j = JSONObject(res.get("redditapi-post/content-video-rich.json"))
         val p = StandardPost(j, "after")
         assertThat(p.content, equalTo("link-url"))
         assertThat(p.contentType, equalTo(PostContentType.VIDEO_RICH))
@@ -149,7 +149,7 @@ class UnitTest {
 
     @Test
     fun testContent_other() {
-        val j = JSONObject(res.get("redditapi-post-other.json"))
+        val j = JSONObject(res.get("redditapi-post/content-other.json"))
         val p = StandardPost(j, "after")
         assertThat(p.content, equalTo("link-url"))
         assertThat(p.contentType, equalTo(PostContentType.OTHER))
