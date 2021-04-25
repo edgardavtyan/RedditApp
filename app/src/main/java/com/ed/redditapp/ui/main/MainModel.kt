@@ -1,22 +1,22 @@
 package com.ed.redditapp.ui.main
 
 import com.ed.redditapp.lib.api.Post
-import com.ed.redditapp.lib.api.RedditApi
 
-class MainModel(redditApi: RedditApi) {
+class MainModel(
+        val postsAsyncTask: MainPostsAsyncTask,
+        val subredditIconUrlAsyncTask: MainSubredditIconUrlAsyncTask) {
+
     private var posts: Array<Post> = emptyArray()
-    private val mainPostsAsyncTask = MainPostsAsyncTask(redditApi)
-    private val subredditIconUrlAsyncTask = MainSubredditIconUrlAsyncTask(redditApi)
 
     fun getMainPagePosts(callback: MainPostsCallback) {
-        mainPostsAsyncTask.run(null) { posts ->
+        postsAsyncTask.run(null) { posts ->
             this.posts = posts
             callback(posts)
         }
     }
 
     fun getNextPosts(after: String, callback: MainPostsCallback) {
-        mainPostsAsyncTask.run(after) { posts ->
+        postsAsyncTask.run(after) { posts ->
             this.posts += posts
             callback(posts)
         }

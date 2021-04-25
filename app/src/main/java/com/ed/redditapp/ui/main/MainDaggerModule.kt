@@ -15,5 +15,13 @@ class MainDaggerModule(val acitivty: MainActivity) {
     fun presenter(model: MainModel) = MainPresenter(acitivty, model)
 
     @Provides @ActivityScope
-    fun model(redditApi: RedditApi) = MainModel(redditApi)
+    fun model(postsAsyncTask: MainPostsAsyncTask, iconUrlAsyncTask: MainSubredditIconUrlAsyncTask)
+            = MainModel(postsAsyncTask, iconUrlAsyncTask)
+
+    @Provides @ActivityScope
+    fun postAsyncTask(redditApi: RedditApi) = MainPostsAsyncTask(redditApi)
+
+    @Provides @ActivityScope
+    fun subredditIconUrlAsyncTask(redditApi: RedditApi)
+            = MainSubredditIconUrlAsyncTask(redditApi)
 }
