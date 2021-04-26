@@ -1,4 +1,4 @@
-package com.ed.redditapp
+package com.ed.redditapp.testutil
 
 class ResourceReader {
     fun get(path: String): String {

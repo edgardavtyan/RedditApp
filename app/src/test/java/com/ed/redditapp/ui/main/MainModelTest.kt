@@ -1,7 +1,6 @@
-package com.ed.redditapp
+package com.ed.redditapp.ui.main
 
 import com.ed.redditapp.lib.api.Post
-import com.ed.redditapp.ui.main.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock

@@ -1,7 +1,6 @@
-package com.ed.redditapp
+package com.ed.redditapp.lib.api.standard
 
-import com.ed.redditapp.lib.api.standard.StandardComment
-import com.ed.redditapp.lib.api.standard.StandardJsonComment
+import com.ed.redditapp.testutil.ResourceReader
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.json.JSONObject

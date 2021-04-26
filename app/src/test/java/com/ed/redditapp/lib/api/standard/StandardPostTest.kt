@@ -1,7 +1,7 @@
-package com.ed.redditapp
+package com.ed.redditapp.lib.api.standard
 
+import com.ed.redditapp.testutil.ResourceReader
 import com.ed.redditapp.lib.api.PostContentType
-import com.ed.redditapp.lib.api.standard.StandardPost
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.nullValue
 import org.hamcrest.MatcherAssert.assertThat
