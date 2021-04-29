@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ed.redditapp.R
+import com.ed.redditapp.databinding.ListitemPostBinding
 import com.ed.redditapp.lib.api.Post
 
 typealias PostListClickListener = (post: Post) -> Unit
@@ -27,7 +28,7 @@ class PostListAdapter: RecyclerView.Adapter<PostListViewHolder>() {
         val itemView = LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.listitem_post, parent, false)
-        return PostListViewHolder(itemView)
+        return PostListViewHolder(ListitemPostBinding.bind(itemView))
     }
 
     override fun onBindViewHolder(holder: PostListViewHolder, position: Int) {

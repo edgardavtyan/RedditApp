@@ -8,13 +8,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ed.redditapp.R
 import com.ed.redditapp.databinding.ListitemPostBinding
-import com.ed.redditapp.format
 import com.ed.redditapp.lib.api.PostThumbnail
 import java.util.*
 
-class PostListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val binding = ListitemPostBinding.bind(itemView)
-    val context = itemView.context
+class PostListViewHolder(private val binding : ListitemPostBinding)
+        : RecyclerView.ViewHolder(binding.root) {
+    private val context = binding.root.context
 
     fun setTitle(title: String?) {
         binding.title.text = title
